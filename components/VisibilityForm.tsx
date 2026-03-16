@@ -1,21 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
-type FormState = "idle" | "submitting" | "success";
+type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function VisibilityForm() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [email, setEmail] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setFormState("submitting");
 
-    // Simulated delay — replace with real API call later
-    await new Promise((r) => setTimeout(r, 2000));
+    if (!brand.trim() || !category.trim() || !email.trim()) return;
+
+    setFormState("submitting");
+    setErrorMsg("");
+
+    const { error } = await supabase.from("submissions").insert({
+      brand_name: brand.trim(),
+      product_category: category.trim(),
+      email: email.trim(),
+    });
+
+    if (error) {
+      setErrorMsg("Something went wrong. Please try again.");
+      setFormState("error");
+      return;
+    }
 
     setFormState("success");
   }
@@ -123,6 +138,10 @@ export default function VisibilityForm() {
           ? "Analyzing AI visibility..."
           : "Check My AI Visibility"}
       </button>
+
+      {formState === "error" && (
+        <p className="text-xs text-red-600 text-center mt-3">{errorMsg}</p>
+      )}
 
       <p className="text-xs text-secondary text-center mt-3">
         Early beta — testing with the first 100 brands.
