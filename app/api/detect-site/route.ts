@@ -134,6 +134,61 @@ function scoreCategories(text: string): string | null {
   return bestScore >= 2 ? bestCategory : null;
 }
 
+/** Detect Amazon-specific product category from breadcrumbs or department links. */
+function extractAmazonCategory(html: string): string | null {
+  // Amazon breadcrumb patterns (e.g., "Electronics › Computers & Accessories")
+  const breadcrumbMatch = html.match(
+    /id="wayfinding-breadcrumbs_feature_div"[^>]*>([\s\S]*?)<\/div>/i,
+  );
+  const breadcrumbText = breadcrumbMatch?.[1]?.replace(/<[^>]+>/g, " ") || "";
+
+  // Also check the #nav-subnav department or the dp-container category
+  const deptMatch =
+    html.match(/data-category="([^"]+)"/i) ||
+    html.match(/"department":\s*"([^"]+)"/i);
+  const deptText = deptMatch?.[1] || "";
+
+  const combined = `${breadcrumbText} ${deptText}`.toLowerCase();
+  if (!combined.trim()) return null;
+
+  // Score against our categories using the combined Amazon-specific text
+  // Use a lower threshold since this is targeted extraction
+  const lower = combined;
+  let bestCategory: string | null = null;
+  let bestScore = 0;
+
+  for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
+    let score = 0;
+    for (const keyword of keywords) {
+      if (lower.includes(keyword)) score++;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestCategory = category;
+    }
+  }
+
+  return bestScore >= 1 ? bestCategory : null;
+}
+
+/** Known marketplace/retailer short-link domains and their canonical hosts. */
+const MARKETPLACE_HOSTS: Record<string, string> = {
+  "a.co": "amazon.com",
+  "amzn.to": "amazon.com",
+  "amzn.com": "amazon.com",
+};
+
+/** Check if a URL belongs to a known marketplace. */
+function getMarketplaceHost(url: string): string | null {
+  try {
+    const hostname = new URL(url).hostname.replace(/^www\./, "");
+    if (hostname.includes("amazon.")) return "amazon.com";
+    return MARKETPLACE_HOSTS[hostname] || null;
+  } catch {
+    return null;
+  }
+}
+
 function extractBrand(
   html: string,
   url: string,
@@ -165,6 +220,27 @@ function extractBrand(
   return null;
 }
 
+/** Extract the brand/seller name from an Amazon product page. */
+function extractAmazonBrand(html: string): string | null {
+  // "by BrandName" pattern near the title
+  const bylineMatch = html.match(
+    /id="bylineInfo"[^>]*>[\s\S]*?(?:Visit the |Brand:\s*)?([^<]+)</i,
+  );
+  if (bylineMatch?.[1]) {
+    const cleaned = bylineMatch[1]
+      .replace(/Visit the\s+/i, "")
+      .replace(/\s+Store$/i, "")
+      .trim();
+    if (cleaned) return cleaned;
+  }
+
+  // "brand":"BrandName" in JSON-LD or inline data
+  const brandJsonMatch = html.match(/"brand"\s*:\s*(?:\{[^}]*"name"\s*:\s*)?["']([^"']+)["']/i);
+  if (brandJsonMatch?.[1]) return brandJsonMatch[1].trim();
+
+  return null;
+}
+
 export async function POST(request: NextRequest) {
   let url: string;
   try {
@@ -190,10 +266,12 @@ export async function POST(request: NextRequest) {
 
   try {
     const res = await fetch(url, {
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(8000),
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (compatible; AIVisibilityBot/1.0)",
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
       },
       redirect: "follow",
     });
@@ -203,7 +281,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ category: null, brand: null });
     }
 
-    const html = (await res.text()).slice(0, 50000);
+    // Use the final URL after redirects for marketplace detection
+    const finalUrl = res.url || url;
+    const isAmazon = getMarketplaceHost(finalUrl) === "amazon.com" || getMarketplaceHost(url) === "amazon.com";
+
+    // Allow more HTML for Amazon product pages (they're large)
+    const html = (await res.text()).slice(0, isAmazon ? 200000 : 50000);
 
     const title = extractTitle(html);
     const description = extractMeta(html, "description");
@@ -213,8 +296,16 @@ export async function POST(request: NextRequest) {
 
     const combinedText = [title, description, ogTitle, ogDescription, keywords].join(" ");
 
-    const category = scoreCategories(combinedText);
-    const brand = extractBrand(html, url);
+    // For Amazon URLs, try Amazon-specific extraction first
+    let category = scoreCategories(combinedText);
+    let brand: string | null = null;
+
+    if (isAmazon) {
+      if (!category) category = extractAmazonCategory(html);
+      brand = extractAmazonBrand(html);
+    }
+
+    if (!brand) brand = extractBrand(html, finalUrl);
 
     return NextResponse.json({ category, brand });
   } catch {
