@@ -1,12 +1,12 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-border py-12">
+    <footer className="border-t border-border py-16">
       <div className="max-w-3xl mx-auto px-6 text-center">
         <p className="text-sm text-secondary leading-relaxed max-w-md mx-auto">
-          Robert Hu is an e-commerce operator and builder focused on how AI is
-          changing product discovery.
+          AI Visibility Checker is built by Robert Hu — an e-commerce operator
+          focused on how AI is changing product discovery.
         </p>
-        <p className="mt-4 text-xs text-secondary/60">
+        <p className="mt-6 text-xs text-muted">
           &copy; {new Date().getFullYear()} AI Visibility Checker
         </p>
       </div>
