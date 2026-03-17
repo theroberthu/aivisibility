@@ -6,26 +6,23 @@ export default function WhyIBuiltThis() {
           About This Project
         </p>
         <h2 className="text-3xl md:text-4xl font-bold text-dark tracking-tight leading-tight">
-          Why I built this
+          Why This Exists
         </h2>
 
         <div className="mt-8 space-y-5 text-[17px] text-secondary leading-relaxed">
           <p>
-            I&apos;ve spent years working with e-commerce brands and Amazon
-            sellers. Recently, I started noticing a pattern: more buyers are
-            asking AI tools what to buy before they ever open Amazon or Google.
+            I&apos;ve spent years working in ecommerce and marketplace
+            environments where small visibility changes can have a real impact
+            on discovery and sales.
           </p>
           <p>
-            But when I looked for a way to measure whether a brand shows up in
-            AI recommendations, nothing existed. No tool tested real buyer
-            prompts. No report showed you which competitors AI was recommending
-            instead.
-          </p>
-          <p>
-            So I built one. Each report runs 20 buyer-intent prompts across
-            ChatGPT, Claude, Perplexity, and Gemini — and returns a structured
-            analysis of your brand&apos;s visibility compared to category
+            As AI starts shaping product recommendations, brands need a way to
+            see whether they&apos;re being recommended or replaced by
             competitors.
+          </p>
+          <p>
+            Your GEO Report was built to make that shift visible for ecommerce
+            brands.
           </p>
         </div>
 
