@@ -8,6 +8,7 @@ type FormState = "idle" | "submitting" | "success" | "error";
 export default function VisibilityForm() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [brand, setBrand] = useState("");
+  const [website, setWebsite] = useState("");
   const [category, setCategory] = useState("");
   const [email, setEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -22,6 +23,7 @@ export default function VisibilityForm() {
 
     const { error } = await supabase.from("submissions").insert({
       brand_name: brand.trim(),
+      website_url: website.trim() || null,
       product_category: category.trim(),
       email: email.trim(),
     });
@@ -90,6 +92,29 @@ export default function VisibilityForm() {
             placeholder="e.g. VitalGlow"
             className="w-full rounded-lg border border-border px-4 py-2.5 text-sm text-dark placeholder:text-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           />
+          <p className="text-xs text-secondary mt-1">
+            Your brand or product name as customers know it
+          </p>
+        </div>
+
+        <div>
+          <label
+            htmlFor="website"
+            className="block text-sm font-medium text-dark mb-1.5"
+          >
+            Website URL
+          </label>
+          <input
+            id="website"
+            type="url"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            placeholder="e.g. https://yourbrand.com"
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm text-dark placeholder:text-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+          />
+          <p className="text-xs text-secondary mt-1">
+            So we can verify your brand details
+          </p>
         </div>
 
         <div>
@@ -99,15 +124,43 @@ export default function VisibilityForm() {
           >
             Product Category
           </label>
-          <input
+          <select
             id="category"
-            type="text"
             required
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            placeholder="e.g. Collagen Peptides"
-            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm text-dark placeholder:text-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-          />
+            className="w-full rounded-lg border border-border px-4 py-2.5 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors bg-white"
+          >
+            <option value="" disabled>
+              Select a category…
+            </option>
+            <option value="Arts, Crafts & Sewing">Arts, Crafts & Sewing</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Baby Products">Baby Products</option>
+            <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+            <option value="Books">Books</option>
+            <option value="Cell Phones & Accessories">Cell Phones & Accessories</option>
+            <option value="Clothing, Shoes & Jewelry">Clothing, Shoes & Jewelry</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Grocery & Gourmet Food">Grocery & Gourmet Food</option>
+            <option value="Health & Household">Health & Household</option>
+            <option value="Home & Kitchen">Home & Kitchen</option>
+            <option value="Industrial & Scientific">Industrial & Scientific</option>
+            <option value="Kitchen & Dining">Kitchen & Dining</option>
+            <option value="Musical Instruments">Musical Instruments</option>
+            <option value="Office Products">Office Products</option>
+            <option value="Patio, Lawn & Garden">Patio, Lawn & Garden</option>
+            <option value="Pet Supplies">Pet Supplies</option>
+            <option value="Software">Software</option>
+            <option value="Sports & Outdoors">Sports & Outdoors</option>
+            <option value="Tools & Home Improvement">Tools & Home Improvement</option>
+            <option value="Toys & Games">Toys & Games</option>
+            <option value="Video Games">Video Games</option>
+            <option value="Other">Other</option>
+          </select>
+          <p className="text-xs text-secondary mt-1">
+            The Amazon department that best matches your product
+          </p>
         </div>
 
         <div>
@@ -126,6 +179,9 @@ export default function VisibilityForm() {
             placeholder="you@company.com"
             className="w-full rounded-lg border border-border px-4 py-2.5 text-sm text-dark placeholder:text-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           />
+          <p className="text-xs text-secondary mt-1">
+            We&apos;ll send your AI visibility report here
+          </p>
         </div>
       </div>
 
