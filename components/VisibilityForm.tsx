@@ -86,7 +86,7 @@ export default function VisibilityForm() {
 
   if (formState === "success") {
     return (
-      <div className="bg-surface rounded-xl border border-border p-8 text-center">
+      <div className="bg-surface rounded-xl border border-border border-t-2 border-t-accent p-8 text-center">
         <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg
             className="w-6 h-6 text-success"
@@ -116,10 +116,10 @@ export default function VisibilityForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-surface rounded-xl border border-border p-8"
+      className="bg-surface rounded-xl border border-border border-t-2 border-t-accent p-8"
     >
       <h3 className="text-base font-semibold text-dark mb-6">
-        Get your free AI visibility report
+        Request AI Visibility Analysis
       </h3>
 
       <div className="space-y-4">
@@ -257,17 +257,19 @@ export default function VisibilityForm() {
         disabled={formState === "submitting"}
         className="w-full mt-6 bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        {formState === "submitting"
-          ? "Analyzing AI visibility..."
-          : "Check My AI Visibility"}
+        {formState === "submitting" ? (
+          <span className="font-mono text-sm">Running analysis…</span>
+        ) : (
+          "Run Analysis"
+        )}
       </button>
 
       {formState === "error" && (
         <p className="text-xs text-red-600 text-center mt-3">{errorMsg}</p>
       )}
 
-      <p className="text-xs text-muted text-center mt-3">
-        Free &middot; No credit card &middot; Results in 24 hours
+      <p className="text-xs text-muted text-center mt-3 font-mono">
+        Free · No credit card · Results in 24 hours
       </p>
     </form>
   );

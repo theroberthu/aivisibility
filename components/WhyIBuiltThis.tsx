@@ -3,7 +3,7 @@ export default function WhyIBuiltThis() {
     <section className="py-20 md:py-28">
       <div className="max-w-3xl mx-auto px-6">
         <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted mb-3">
-          Background
+          About the Index
         </p>
         <h2 className="text-3xl md:text-4xl font-bold text-dark tracking-tight leading-tight">
           Why I built this
@@ -26,7 +26,7 @@ export default function WhyIBuiltThis() {
         </div>
 
         <div className="mt-10 flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-dark text-white flex items-center justify-center text-sm font-semibold">
+          <div className="w-10 h-10 rounded-full bg-dark text-white flex items-center justify-center text-sm font-semibold border border-border">
             RH
           </div>
           <div>
@@ -34,6 +34,7 @@ export default function WhyIBuiltThis() {
             <p className="text-xs text-muted">
               E-commerce operator &amp; builder
             </p>
+            <p className="text-xs font-mono text-muted">aivisibility.com</p>
           </div>
         </div>
       </div>
