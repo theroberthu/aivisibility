@@ -103,11 +103,12 @@ export default function VisibilityForm() {
           </svg>
         </div>
         <h3 className="text-lg font-semibold text-dark mb-2">
-          Your report will be emailed within 24 hours.
+          Your GEO report will be emailed within 24 hours.
         </h3>
         <p className="text-muted text-sm">
-          We&apos;ll analyze how AI tools respond to queries in your category
-          and send you a detailed GEO report.
+          We&apos;ll test 20 buyer-intent prompts across 4 AI engines in your
+          category and send you a detailed visibility report with competitor
+          rankings.
         </p>
       </div>
     );
@@ -118,9 +119,12 @@ export default function VisibilityForm() {
       onSubmit={handleSubmit}
       className="bg-surface rounded-xl border border-border border-t-2 border-t-accent p-8"
     >
-      <h3 className="text-base font-semibold text-dark mb-6">
+      <h3 className="text-base font-semibold text-dark mb-1">
         Get Your GEO Report
       </h3>
+      <p className="text-xs text-muted mb-6">
+        AI visibility analysis for your brand and category
+      </p>
 
       <div className="space-y-4">
         <div>
@@ -268,7 +272,7 @@ export default function VisibilityForm() {
       )}
 
       <p className="text-xs text-muted text-center mt-3 font-mono">
-        Free · No credit card · Results in 24 hours
+        Free · No credit card · 4 engines · 20 prompts · 24h delivery
       </p>
     </form>
   );

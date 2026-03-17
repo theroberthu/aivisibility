@@ -1,7 +1,8 @@
 const exampleQueries = [
-  "Best collagen peptides",
-  "Best standing desk under $500",
-  "Best magnesium supplement for sleep",
+  { query: "Best collagen peptides", engines: "ChatGPT, Perplexity, Gemini" },
+  { query: "Best standing desk under $500", engines: "ChatGPT, Claude, Perplexity" },
+  { query: "Best magnesium supplement for sleep", engines: "All 4 engines" },
+  { query: "Wireless earbuds for working out", engines: "ChatGPT, Claude, Gemini" },
 ];
 
 export default function WhyThisMatters() {
@@ -12,46 +13,61 @@ export default function WhyThisMatters() {
           The Shift
         </p>
         <h2 className="text-3xl md:text-4xl font-bold text-dark tracking-tight leading-tight">
-          Product discovery is changing
+          Product discovery is moving to AI
         </h2>
 
         <p className="mt-6 text-lg text-secondary leading-relaxed max-w-xl">
-          Instead of starting on search engines or marketplaces, more buyers
-          are asking AI what to buy. Queries like these are becoming the new
-          front door to purchase decisions:
+          More buyers are asking AI engines what to buy before they search
+          Amazon, Google, or any marketplace. These are real buyer-intent prompts
+          that generate product recommendations:
         </p>
 
         {/* Example queries — tabular research index */}
-        <div className="mt-8 bg-light-bg rounded-lg border border-border-subtle p-5">
-          <div className="space-y-3">
-            {exampleQueries.map((query, i) => (
+        <div className="mt-8 bg-light-bg rounded-lg border border-border-subtle overflow-hidden">
+          <div className="px-5 py-3 border-b border-border-subtle flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-wider text-muted font-medium">
+              Observed Buyer Prompts
+            </span>
+            <span className="font-mono text-[10px] text-muted">
+              Engines returning product recommendations
+            </span>
+          </div>
+          <div className="px-5 py-4 space-y-3">
+            {exampleQueries.map((item, i) => (
               <div
-                key={query}
-                className="flex items-center gap-4 text-[15px]"
+                key={item.query}
+                className="flex items-start justify-between gap-4 text-[14px]"
               >
-                <span className="font-mono text-xs text-muted w-6 shrink-0 tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="font-medium text-dark">
-                  &ldquo;{query}&rdquo;
+                <div className="flex items-start gap-3">
+                  <span className="font-mono text-[10px] text-muted mt-1 shrink-0 tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-medium text-dark">
+                    &ldquo;{item.query}&rdquo;
+                  </span>
+                </div>
+                <span className="font-mono text-[10px] text-muted shrink-0 mt-1 text-right">
+                  {item.engines}
                 </span>
               </div>
             ))}
           </div>
-          <p className="text-xs font-mono text-muted mt-4 pt-3 border-t border-border-subtle">
-            Based on observed buyer prompt patterns across ChatGPT, Claude,
-            Perplexity, Gemini
-          </p>
+          <div className="px-5 py-3 border-t border-border-subtle">
+            <p className="text-[11px] font-mono text-muted">
+              Source: observed buyer prompt patterns across ChatGPT, Claude, Perplexity, Gemini · March 2026
+            </p>
+          </div>
         </div>
 
         <div className="mt-10 space-y-4 text-secondary leading-relaxed border-l-2 border-border pl-6">
           <p>
-            AI tools are becoming a new layer of product discovery — one that
-            most brands can&apos;t see into.
+            When a buyer asks an AI engine &ldquo;what should I buy,&rdquo; the AI returns
+            3–5 brand recommendations — not a page of 20 links. If your brand isn&apos;t
+            in that shortlist, you&apos;re invisible to a growing segment of buyers.
           </p>
           <p className="font-medium text-dark">
-            If you&apos;re not in the AI answer, you&apos;re invisible to a
-            growing segment of buyers.
+            Most ecommerce brands have no way to measure whether they appear
+            in these AI-generated recommendations. That&apos;s what this report measures.
           </p>
         </div>
       </div>

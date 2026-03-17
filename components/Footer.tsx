@@ -6,8 +6,11 @@ export default function Footer() {
       <div className="max-w-3xl mx-auto px-6 flex flex-col md:flex-row md:items-start md:justify-between gap-8">
         <div>
           <p className="text-sm text-secondary leading-relaxed max-w-md">
-            Your GEO Report is built by Robert Hu — an e-commerce operator
-            focused on how AI is changing product discovery.
+            Your GEO Report analyzes AI product recommendations across ChatGPT,
+            Claude, Perplexity, and Gemini. Built for ecommerce brands by Robert Hu.
+          </p>
+          <p className="mt-3 font-mono text-[11px] text-muted">
+            20 buyer-intent prompts · 4 AI engines · Competitor benchmarks
           </p>
           <p className="mt-4 font-mono text-xs text-muted">
             &copy; {new Date().getFullYear()} Your GEO Report
@@ -24,7 +27,7 @@ export default function Footer() {
             href="/#get-report"
             className="text-sm text-secondary hover:text-dark transition-colors"
           >
-            Request Report
+            Get Report
           </a>
         </nav>
       </div>

@@ -3,7 +3,7 @@ export default function WhyIBuiltThis() {
     <section className="py-20 md:py-28">
       <div className="max-w-3xl mx-auto px-6">
         <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted mb-3">
-          About the Index
+          About This Project
         </p>
         <h2 className="text-3xl md:text-4xl font-bold text-dark tracking-tight leading-tight">
           Why I built this
@@ -12,16 +12,20 @@ export default function WhyIBuiltThis() {
         <div className="mt-8 space-y-5 text-[17px] text-secondary leading-relaxed">
           <p>
             I&apos;ve spent years working with e-commerce brands and Amazon
-            sellers.
+            sellers. Recently, I started noticing a pattern: more buyers are
+            asking AI tools what to buy before they ever open Amazon or Google.
           </p>
           <p>
-            Recently, I noticed something new: more buyers are asking AI tools
-            what to buy before they ever search Amazon. But brands have no clear
-            way to measure whether they appear in those recommendations.
+            But when I looked for a way to measure whether a brand shows up in
+            AI recommendations, nothing existed. No tool tested real buyer
+            prompts. No report showed you which competitors AI was recommending
+            instead.
           </p>
           <p>
-            So I built a simple tool to test it — run real prompts across
-            multiple AI engines, and surface whether your brand shows up.
+            So I built one. Each report runs 20 buyer-intent prompts across
+            ChatGPT, Claude, Perplexity, and Gemini — and returns a structured
+            analysis of your brand&apos;s visibility compared to category
+            competitors.
           </p>
         </div>
 
