@@ -11,7 +11,7 @@ export default function Hero() {
               Report Edition — March 2026
             </p>
             <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted mb-4">
-              AI Visibility Intelligence
+              Your GEO Report
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-dark leading-[1.1] tracking-tight">
               Is AI recommending
@@ -22,6 +22,9 @@ export default function Hero() {
               Buyers are asking ChatGPT, Claude, and Perplexity what to buy —
               before they ever search Amazon. Find out if your brand appears in
               those answers.
+            </p>
+            <p className="mt-3 text-sm text-accent font-medium">
+              Built for ecommerce brands that want to know when AI recommends competitors instead.
             </p>
             <div className="w-12 h-px bg-border my-6" />
             <p className="font-mono text-xs text-muted">

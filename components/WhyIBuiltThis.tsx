@@ -34,7 +34,7 @@ export default function WhyIBuiltThis() {
             <p className="text-xs text-muted">
               E-commerce operator &amp; builder
             </p>
-            <p className="text-xs font-mono text-muted">aivisibility.com</p>
+            <p className="text-xs font-mono text-muted">yourgeoreport.com</p>
           </div>
         </div>
       </div>

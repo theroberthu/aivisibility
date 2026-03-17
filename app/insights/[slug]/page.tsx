@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getPostBySlug(slug);
   if (!post) return { title: "Not Found" };
   return {
-    title: `${post.title} — AI Visibility`,
+    title: `${post.title} — Your GEO Report`,
     description: post.excerpt,
   };
 }
@@ -63,17 +63,17 @@ export default async function InsightArticle({ params }: PageProps) {
       {/* CTA */}
       <div className="mt-16 border-t-2 border-accent bg-light-bg rounded-lg p-8">
         <h3 className="text-lg font-semibold text-dark">
-          Check your brand&apos;s AI visibility
+          Get your free GEO report
         </h3>
         <p className="mt-2 text-sm text-secondary">
-          Get a free analysis of how AI engines recommend your brand across
-          real buyer prompts.
+          See how AI engines recommend your brand across real buyer prompts —
+          free, no credit card required.
         </p>
         <Link
           href="/#get-report"
           className="inline-block mt-4 bg-dark hover:bg-primary text-white font-medium py-2.5 px-6 rounded-lg text-sm transition-colors"
         >
-          Run Analysis
+          Get My GEO Report
         </Link>
       </div>
     </main>

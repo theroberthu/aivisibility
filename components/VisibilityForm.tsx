@@ -107,7 +107,7 @@ export default function VisibilityForm() {
         </h3>
         <p className="text-muted text-sm">
           We&apos;ll analyze how AI tools respond to queries in your category
-          and send you a detailed visibility report.
+          and send you a detailed GEO report.
         </p>
       </div>
     );
@@ -119,7 +119,7 @@ export default function VisibilityForm() {
       className="bg-surface rounded-xl border border-border border-t-2 border-t-accent p-8"
     >
       <h3 className="text-base font-semibold text-dark mb-6">
-        Request AI Visibility Analysis
+        Get Your GEO Report
       </h3>
 
       <div className="space-y-4">
@@ -222,7 +222,6 @@ export default function VisibilityForm() {
               Patio, Lawn &amp; Garden
             </option>
             <option value="Pet Supplies">Pet Supplies</option>
-            <option value="Software">Software</option>
             <option value="Sports & Outdoors">Sports &amp; Outdoors</option>
             <option value="Tools & Home Improvement">
               Tools &amp; Home Improvement
@@ -258,9 +257,9 @@ export default function VisibilityForm() {
         className="w-full mt-6 bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {formState === "submitting" ? (
-          <span className="font-mono text-sm">Running analysis…</span>
+          <span className="font-mono text-sm">Generating report…</span>
         ) : (
-          "Run Analysis"
+          "Get My GEO Report"
         )}
       </button>
 

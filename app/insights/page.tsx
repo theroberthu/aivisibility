@@ -3,7 +3,7 @@ import Link from "next/link";
 import { insightPosts, formatDate } from "@/lib/insights";
 
 export const metadata: Metadata = {
-  title: "Insights — AI Visibility",
+  title: "Insights — Your GEO Report",
   description:
     "Weekly AI visibility rankings, GEO analysis, and intelligence for ecommerce brands.",
 };
@@ -16,7 +16,7 @@ export default function InsightsPage() {
           Insights
         </p>
         <h1 className="text-3xl md:text-4xl font-bold text-dark tracking-tight leading-tight">
-          AI Visibility Intelligence
+          Insights by Your GEO Report
         </h1>
         <p className="mt-4 text-secondary leading-relaxed max-w-xl">
           Weekly rankings, category analysis, and research on how AI engines are

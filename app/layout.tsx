@@ -3,9 +3,9 @@ import Header from "@/components/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Visibility Checker — Does AI Recommend Your Brand?",
+  title: "Your GEO Report — AI Visibility Reports for Ecommerce Brands",
   description:
-    "Check whether AI tools like ChatGPT, Claude, and Perplexity recommend your brand when buyers ask what to buy. Built for Amazon sellers and physical product brands.",
+    "Find out if AI tools like ChatGPT, Claude, and Perplexity recommend your brand when buyers ask what to buy. Free GEO reports for ecommerce brands.",
 };
 
 export default function RootLayout({

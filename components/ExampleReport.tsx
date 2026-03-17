@@ -20,11 +20,11 @@ export default function ExampleReport() {
           Sample Output
         </p>
         <h2 className="text-3xl md:text-4xl font-bold text-dark tracking-tight leading-tight">
-          AI Visibility Report
+          Sample GEO Report
         </h2>
         <p className="mt-4 text-secondary leading-relaxed max-w-xl">
-          Here&apos;s what a report looks like. We test real AI prompts across
-          multiple engines and score how visible your brand is.
+          Here&apos;s what your GEO report looks like. We test real AI prompts
+          across multiple engines and score how visible your brand is.
         </p>
 
         {/* Report document */}
@@ -32,7 +32,7 @@ export default function ExampleReport() {
           {/* Report masthead */}
           <div className="px-6 py-3 border-b border-divider bg-light-bg flex items-center justify-between">
             <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted font-medium">
-              AI Visibility Report
+              Your GEO Report
             </span>
             <span className="font-mono text-[10px] text-muted">
               Report ID: VG-2026-03
@@ -180,7 +180,7 @@ export default function ExampleReport() {
           {/* Report footer */}
           <div className="px-6 py-3 bg-light-bg flex items-center justify-between">
             <span className="font-mono text-[10px] text-muted">
-              aivisibility.com
+              yourgeoreport.com
             </span>
             <span className="font-mono text-[10px] text-muted">
               Generated March 2026

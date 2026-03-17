@@ -7,7 +7,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2.5 group">
           <span className="w-[7px] h-[7px] bg-accent rounded-[1px]" />
           <span className="text-sm font-semibold text-dark tracking-tight">
-            AI Visibility
+            Your GEO Report
           </span>
         </Link>
         <nav className="flex items-center gap-6">
