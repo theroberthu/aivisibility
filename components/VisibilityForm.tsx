@@ -1,14 +1,16 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
-type FormState = "idle" | "submitting" | "success" | "error";
+type FormState = "idle" | "submitting" | "error";
 
 const inputClass =
   "w-full rounded-lg border border-border px-4 py-2.5 text-sm text-dark placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-colors";
 
 export default function VisibilityForm() {
+  const router = useRouter();
   const [formState, setFormState] = useState<FormState>("idle");
   const [brand, setBrand] = useState("");
   const [website, setWebsite] = useState("");
@@ -68,50 +70,24 @@ export default function VisibilityForm() {
     setFormState("submitting");
     setErrorMsg("");
 
-    const { error } = await supabase.from("submissions").insert({
-      brand_name: brand.trim(),
-      website_url: website.trim() || null,
-      product_category: category.trim(),
-      email: email.trim(),
-    });
+    const { data, error } = await supabase
+      .from("submissions")
+      .insert({
+        brand_name: brand.trim(),
+        website_url: website.trim() || null,
+        product_category: category.trim(),
+        email: email.trim(),
+      })
+      .select("id")
+      .single();
 
-    if (error) {
+    if (error || !data) {
       setErrorMsg("Something went wrong. Please try again.");
       setFormState("error");
       return;
     }
 
-    setFormState("success");
-  }
-
-  if (formState === "success") {
-    return (
-      <div className="bg-surface rounded-xl border border-border border-t-2 border-t-accent p-8 text-center">
-        <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg
-            className="w-6 h-6 text-success"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-        </div>
-        <h3 className="text-lg font-semibold text-dark mb-2">
-          Your GEO report will be emailed within 24 hours.
-        </h3>
-        <p className="text-muted text-sm">
-          We&apos;ll test 20 buyer-intent prompts across 4 AI engines in your
-          category and send you a detailed visibility report with competitor
-          rankings.
-        </p>
-      </div>
-    );
+    router.push(`/report/${data.id}`);
   }
 
   return (
