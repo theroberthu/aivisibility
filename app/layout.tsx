@@ -2,10 +2,31 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import "./globals.css";
 
+const SITE_URL = "https://yourgeoreport.com";
+
 export const metadata: Metadata = {
-  title: "Your GEO Report — AI Visibility Reports for Ecommerce Brands",
+  title: "YourGEOReport | AI Visibility Reports for Ecommerce Brands",
   description:
-    "Find out if ChatGPT and Claude recommend your brand when buyers ask what to buy. Free AI visibility reports for ecommerce brands.",
+    "See whether ChatGPT and Claude recommend your brand when shoppers ask what to buy. Get your AI visibility report in 24 hours.",
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "YourGEOReport | AI Visibility Reports for Ecommerce Brands",
+    description:
+      "See whether ChatGPT and Claude recommend your brand when shoppers ask what to buy.",
+    url: SITE_URL,
+    siteName: "YourGEOReport",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "YourGEOReport | AI Visibility Reports for Ecommerce Brands",
+    description:
+      "See whether ChatGPT and Claude recommend your brand when shoppers ask what to buy.",
+  },
 };
 
 export default function RootLayout({
