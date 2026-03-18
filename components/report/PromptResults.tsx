@@ -3,8 +3,6 @@ import { PromptResult } from "@/lib/types";
 const ENGINE_SHORT: Record<string, string> = {
   ChatGPT: "GPT",
   Claude: "CL",
-  Perplexity: "PX",
-  Gemini: "GM",
 };
 
 export default function PromptResults({

@@ -16,10 +16,10 @@ export const insightPosts: InsightPost[] = [
     date: "2026-03-15",
     category: "AI Discovery Index",
     excerpt:
-      "Which collagen brands are AI engines recommending? Our monthly index tracks visibility across ChatGPT, Claude, Perplexity, and Gemini.",
+      "Which collagen brands are AI engines recommending? Our monthly index tracks visibility across ChatGPT and Claude.",
     body: [
-      "Every month, we run a standardized set of buyer prompts across four major AI engines to track which brands appear in AI-generated product recommendations. This edition covers the collagen supplements category — one of the most actively queried supplement categories in AI-powered discovery.",
-      "Vital Proteins continues to dominate AI recommendations, appearing in over 80% of tested prompts across all four engines. The brand's strong presence in third-party reviews, clinical study citations, and retailer listings gives it significant advantages in how AI models construct their answers.",
+      "Every month, we run a standardized set of buyer prompts across ChatGPT and Claude to track which brands appear in AI-generated product recommendations. This edition covers the collagen supplements category — one of the most actively queried supplement categories in AI-powered discovery.",
+      "Vital Proteins continues to dominate AI recommendations, appearing in over 80% of tested prompts across both engines. The brand's strong presence in third-party reviews, clinical study citations, and retailer listings gives it significant advantages in how AI models construct their answers.",
       "Ancient Nutrition and Sports Research hold steady in the second and third positions respectively. Both brands benefit from distinctive product positioning — Ancient Nutrition with its multi-collagen approach and Sports Research with its value-oriented messaging.",
       "The long tail remains largely invisible. Brands outside the top five appeared in fewer than 10% of AI responses. For newer or smaller collagen brands, the gap between organic search visibility and AI visibility is significant — and growing.",
       "Key takeaway: AI engines are compressing buyer consideration sets. In traditional search, a buyer might see 20+ options on a results page. In an AI conversation, they typically receive 3-5 recommendations. If your brand isn't in that shortlist, the discoverability gap is real.",

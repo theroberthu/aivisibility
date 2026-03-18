@@ -1,8 +1,8 @@
 const exampleQueries = [
-  { query: "Best collagen peptides", engines: "ChatGPT, Perplexity, Gemini" },
-  { query: "Best standing desk under $500", engines: "ChatGPT, Claude, Perplexity" },
-  { query: "Best magnesium supplement for sleep", engines: "All 4 engines" },
-  { query: "Wireless earbuds for working out", engines: "ChatGPT, Claude, Gemini" },
+  { query: "Best collagen peptides", engines: "ChatGPT, Claude" },
+  { query: "Best standing desk under $500", engines: "ChatGPT" },
+  { query: "Best magnesium supplement for sleep", engines: "ChatGPT, Claude" },
+  { query: "Wireless earbuds for working out", engines: "Claude" },
 ];
 
 export default function WhyThisMatters() {
@@ -54,7 +54,7 @@ export default function WhyThisMatters() {
           </div>
           <div className="px-5 py-3 border-t border-border-subtle">
             <p className="text-[11px] font-mono text-muted">
-              Source: observed buyer prompt patterns across ChatGPT, Claude, Perplexity, Gemini · March 2026
+              Source: observed buyer prompt patterns across ChatGPT and Claude · March 2026
             </p>
           </div>
         </div>

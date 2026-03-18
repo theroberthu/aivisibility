@@ -248,7 +248,7 @@ export default function VisibilityForm() {
       )}
 
       <p className="text-xs text-muted text-center mt-3 font-mono">
-        Free · No credit card · 4 engines · 20 prompts · 24h delivery
+        Free · No credit card · ChatGPT + Claude · 20 prompts
       </p>
     </form>
   );

@@ -5,7 +5,7 @@ import Report from "@/components/report/Report";
 
 export const metadata = {
   title: "Your AI Visibility Report — Your GEO Report",
-  description: "Your personalized AI visibility analysis across ChatGPT, Claude, Perplexity, and Gemini.",
+  description: "Your personalized AI visibility analysis across ChatGPT and Claude.",
 };
 
 export default async function ReportPage({

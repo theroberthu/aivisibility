@@ -6,11 +6,11 @@ export default function Footer() {
       <div className="max-w-3xl mx-auto px-6 flex flex-col md:flex-row md:items-start md:justify-between gap-8">
         <div>
           <p className="text-sm text-secondary leading-relaxed max-w-md">
-            Your GEO Report analyzes AI product recommendations across ChatGPT,
-            Claude, Perplexity, and Gemini. Built for ecommerce brands by Robert Hu.
+            Your GEO Report analyzes AI product recommendations across ChatGPT
+            and Claude. Built for ecommerce brands by Robert Hu.
           </p>
           <p className="mt-3 font-mono text-[11px] text-muted">
-            20 buyer-intent prompts · 4 AI engines · Competitor benchmarks
+            20 buyer-intent prompts · ChatGPT + Claude · Competitor benchmarks
           </p>
           <p className="mt-4 font-mono text-xs text-muted">
             &copy; {new Date().getFullYear()} Your GEO Report

@@ -22,9 +22,9 @@ export default function Hero() {
               your brand?
             </h1>
             <p className="mt-6 text-lg text-secondary leading-relaxed max-w-md">
-              When buyers ask ChatGPT, Claude, Perplexity, or Gemini what to buy,
+              When buyers ask ChatGPT or Claude what to buy,
               does your brand appear? We test real buyer-intent prompts across
-              four AI engines and score your visibility.
+              both engines and score your visibility.
             </p>
             <p className="mt-3 text-[15px] text-dark font-medium max-w-md">
               Built for ecommerce brands that want to know when AI recommends
@@ -36,7 +36,7 @@ export default function Hero() {
             {/* Methodology strip */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-4 gap-x-6">
               <div>
-                <p className="font-mono text-[22px] font-semibold text-dark tabular-nums leading-none">4</p>
+                <p className="font-mono text-[22px] font-semibold text-dark tabular-nums leading-none">2</p>
                 <p className="font-mono text-[10px] uppercase tracking-wider text-muted mt-1.5">AI engines</p>
               </div>
               <div>

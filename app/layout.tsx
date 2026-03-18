@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Your GEO Report — AI Visibility Reports for Ecommerce Brands",
   description:
-    "Find out if AI tools like ChatGPT, Claude, and Perplexity recommend your brand when buyers ask what to buy. Free GEO reports for ecommerce brands.",
+    "Find out if ChatGPT and Claude recommend your brand when buyers ask what to buy. Free AI visibility reports for ecommerce brands.",
 };
 
 export default function RootLayout({

@@ -1,6 +1,6 @@
 import { ReportData } from "./types";
 
-const ENGINES = ["ChatGPT", "Claude", "Perplexity", "Gemini"];
+const ENGINES = ["ChatGPT", "Claude"];
 
 const CATEGORY_COMPETITORS: Record<string, string[]> = {
   "Collagen Peptides": ["Vital Proteins", "Ancient Nutrition", "Sports Research"],
@@ -61,10 +61,8 @@ export function generateMockReport(
   const categoryMedian = 48;
 
   const engineBreakdown = [
-    { engine: "ChatGPT", mentioned: 2, total: 5, percentage: 40 },
-    { engine: "Claude", mentioned: 1, total: 5, percentage: 20 },
-    { engine: "Perplexity", mentioned: 2, total: 5, percentage: 40 },
-    { engine: "Gemini", mentioned: 0, total: 5, percentage: 0 },
+    { engine: "ChatGPT", mentioned: 3, total: 10, percentage: 30 },
+    { engine: "Claude", mentioned: 2, total: 10, percentage: 20 },
   ];
 
   const competitorData = [
@@ -79,11 +77,9 @@ export function generateMockReport(
     engines: ENGINES.map((engine) => ({
       engine,
       mentioned:
-        engine === "Gemini"
-          ? false
-          : engine === "Claude"
+        engine === "Claude"
           ? i < 2
-          : i < 4,
+          : i < 3,
     })),
   }));
 
@@ -96,18 +92,11 @@ export function generateMockReport(
       highlightedBrands: [competitors[0], competitors[1], competitors[2]],
     },
     {
-      engine: "Perplexity",
+      engine: "Claude",
       prompt: `Best ${category.toLowerCase()} to buy right now`,
       response: `Based on recent reviews and expert recommendations, the top ${category.toLowerCase()} include ${competitors[0]} (rated highest overall), ${competitors[1]}, and ${brandName}. ${brandName} has been gaining traction for its value proposition, though it still trails the category leaders in overall visibility.`,
       brandMentioned: true,
       highlightedBrands: [competitors[0], competitors[1], brandName],
-    },
-    {
-      engine: "Gemini",
-      prompt: `${category} recommendations for beginners`,
-      response: `If you're new to ${category.toLowerCase()}, I'd suggest starting with ${competitors[0]} — they have the widest range and strongest reputation. ${competitors[1]} is another solid option with good value. ${competitors[2]} rounds out the top picks with consistently positive user feedback.`,
-      brandMentioned: false,
-      highlightedBrands: [competitors[0], competitors[1], competitors[2]],
     },
   ];
 
@@ -134,16 +123,14 @@ export function generateMockReport(
     },
   ];
 
-  const keyFinding = `${brandName} appears in ${Math.round(
-    (overallScore / 100) * 20
-  )} of 20 tested prompts — below the category median of ${categoryMedian}%. Your brand is mentioned by 2 of 4 engines, but absent from Gemini entirely. Top competitor ${competitors[0]} appears in 80% of prompts.`;
+  const keyFinding = `${brandName} appears in 5 of 20 tested prompts across ChatGPT and Claude — below the category median of ${categoryMedian}%. ChatGPT mentions your brand in 3 of 10 prompts; Claude in 2 of 10. Top competitor ${competitors[0]} appears in 80% of prompts.`;
 
   return {
     brandName,
     category,
     reportDate,
     reportId: `GEO-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
-    methodology: { engines: 4, prompts: 20 },
+    methodology: { engines: 2, prompts: 20 },
     overallScore,
     categoryMedian,
     keyFinding,
