@@ -250,6 +250,11 @@ export default function VisibilityForm() {
       <p className="text-xs text-muted text-center mt-3 font-mono">
         Free · No credit card · ChatGPT + Claude · 20 prompts
       </p>
+
+      <p className="text-[11px] text-muted/70 text-center mt-4 leading-relaxed">
+        Reports are based on sampled buyer-intent prompts and current AI
+        responses. Results may vary as AI systems change over time.
+      </p>
     </form>
   );
 }
