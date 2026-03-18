@@ -27,9 +27,11 @@ export default function WhyIBuiltThis() {
         </div>
 
         <div className="mt-10 flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-dark text-white flex items-center justify-center text-sm font-semibold border border-border">
-            RH
-          </div>
+          <img
+            src="/roberthu.PNG"
+            alt="Robert Hu"
+            className="w-10 h-10 rounded-full object-cover border border-border"
+          />
           <div>
             <p className="text-sm font-semibold text-dark">Robert Hu</p>
             <p className="text-xs text-muted">
