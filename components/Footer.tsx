@@ -16,19 +16,35 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Your GEO Report
           </p>
         </div>
-        <nav className="flex gap-6 md:pt-0.5">
-          <Link
-            href="/insights"
-            className="text-sm text-secondary hover:text-dark transition-colors"
-          >
-            Insights
-          </Link>
-          <a
-            href="/#get-report"
-            className="text-sm text-secondary hover:text-dark transition-colors"
-          >
-            Get Report
-          </a>
+        <nav className="flex flex-col gap-4 md:pt-0.5">
+          <div className="flex gap-6">
+            <Link
+              href="/insights"
+              className="text-sm text-secondary hover:text-dark transition-colors"
+            >
+              Insights
+            </Link>
+            <a
+              href="/#get-report"
+              className="text-sm text-secondary hover:text-dark transition-colors"
+            >
+              Get Report
+            </a>
+          </div>
+          <div className="flex gap-6">
+            <Link
+              href="/privacy"
+              className="text-sm text-muted hover:text-secondary transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-sm text-muted hover:text-secondary transition-colors"
+            >
+              Terms of Service
+            </Link>
+          </div>
         </nav>
       </div>
     </footer>
