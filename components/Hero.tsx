@@ -40,7 +40,7 @@ export default function Hero() {
                 <p className="font-mono text-[10px] uppercase tracking-wider text-muted mt-1.5">AI engines</p>
               </div>
               <div>
-                <p className="font-mono text-[22px] font-semibold text-dark tabular-nums leading-none">20</p>
+                <p className="font-mono text-[22px] font-semibold text-dark tabular-nums leading-none">10+</p>
                 <p className="font-mono text-[10px] uppercase tracking-wider text-muted mt-1.5">Prompts tested</p>
               </div>
               <div>

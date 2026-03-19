@@ -10,7 +10,7 @@ export default function Footer() {
             and Claude. Built for ecommerce brands by Robert Hu.
           </p>
           <p className="mt-3 font-mono text-[11px] text-muted">
-            20 buyer-intent prompts · ChatGPT + Claude · Competitor benchmarks
+            Buyer-intent prompts · ChatGPT + Claude · Competitor benchmarks
           </p>
           <p className="mt-4 font-mono text-xs text-muted">
             &copy; {new Date().getFullYear()} Your GEO Report

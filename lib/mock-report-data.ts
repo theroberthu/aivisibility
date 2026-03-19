@@ -61,8 +61,8 @@ export function generateMockReport(
   const categoryMedian = 48;
 
   const engineBreakdown = [
-    { engine: "ChatGPT", mentioned: 3, total: 10, percentage: 30 },
-    { engine: "Claude", mentioned: 2, total: 10, percentage: 20 },
+    { engine: "ChatGPT", mentioned: 3, total: prompts.length, percentage: 30 },
+    { engine: "Claude", mentioned: 2, total: prompts.length, percentage: 20 },
   ];
 
   const competitorData = [
@@ -123,14 +123,14 @@ export function generateMockReport(
     },
   ];
 
-  const keyFinding = `${brandName} appears in 5 of 20 tested prompts across ChatGPT and Claude — below the category median of ${categoryMedian}%. ChatGPT mentions your brand in 3 of 10 prompts; Claude in 2 of 10. Top competitor ${competitors[0]} appears in 80% of prompts.`;
+  const keyFinding = `${brandName} appears in 5 of ${prompts.length * ENGINES.length} sampled prompts across ChatGPT and Claude — below the category median of ${categoryMedian}%. ChatGPT mentions your brand in 3 of ${prompts.length} prompts; Claude in 2 of ${prompts.length}. Top competitor ${competitors[0]} appears in 80% of prompts.`;
 
   return {
     brandName,
     category,
     reportDate,
     reportId: `GEO-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`,
-    methodology: { engines: 2, prompts: 20 },
+    methodology: { engines: ENGINES.length, prompts: prompts.length },
     overallScore,
     categoryMedian,
     keyFinding,

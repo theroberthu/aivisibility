@@ -14,8 +14,9 @@ export default function ExampleReport() {
           What your report looks like
         </h2>
         <p className="mt-4 text-secondary leading-relaxed max-w-xl">
-          Each report tests 20 buyer-intent prompts across ChatGPT and
-          Claude — then scores your brand against category competitors.
+          Each report tests a focused set of buyer-intent prompts across
+          ChatGPT and Claude — then scores your brand against category
+          competitors.
         </p>
 
         <div className="mt-10">

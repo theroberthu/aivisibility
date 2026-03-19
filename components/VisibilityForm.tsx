@@ -121,7 +121,7 @@ export default function VisibilityForm() {
           <p className="text-xs text-muted mt-1.5">
             {detecting
               ? "Detecting brand and category..."
-              : "We\u2019ll auto-detect your brand and category"}
+              : "We\u2019ll try to detect your brand and category"}
           </p>
         </div>
 
@@ -237,7 +237,7 @@ export default function VisibilityForm() {
         className="w-full mt-6 bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {formState === "submitting" ? (
-          <span className="font-mono text-sm">Generating report…</span>
+          <span className="font-mono text-sm">Submitting…</span>
         ) : (
           "Get My GEO Report"
         )}
@@ -248,7 +248,7 @@ export default function VisibilityForm() {
       )}
 
       <p className="text-xs text-muted text-center mt-3 font-mono">
-        Free · No credit card · ChatGPT + Claude · 20 prompts
+        Free · No credit card · ChatGPT + Claude
       </p>
 
       <p className="text-[11px] text-muted/70 text-center mt-4 leading-relaxed">
