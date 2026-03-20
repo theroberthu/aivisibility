@@ -97,6 +97,19 @@ const CATEGORY_KEYWORDS: Record<string, string[]> = {
   ],
 };
 
+/** Decode common HTML entities (named + numeric) in a string. */
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(parseInt(dec, 10)))
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&apos;/gi, "'")
+    .replace(/&nbsp;/gi, " ");
+}
+
 function extractMeta(html: string, nameOrProperty: string): string {
   const escaped = nameOrProperty.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const re1 = new RegExp(
@@ -372,7 +385,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ category, brand });
+    return NextResponse.json({ category, brand: brand ? decodeHtmlEntities(brand) : null });
   } catch {
     return NextResponse.json({ category: null, brand: null });
   }
