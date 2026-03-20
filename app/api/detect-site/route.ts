@@ -238,6 +238,45 @@ function extractAmazonBrand(html: string): string | null {
   const brandJsonMatch = html.match(/"brand"\s*:\s*(?:\{[^}]*"name"\s*:\s*)?["']([^"']+)["']/i);
   if (brandJsonMatch?.[1]) return brandJsonMatch[1].trim();
 
+  // Product detail table: "Brand" row
+  const detailMatch = html.match(
+    />\s*Brand\s*<\/t[hd]>\s*<td[^>]*>\s*(?:<[^>]+>\s*)*([^<]+)/i,
+  );
+  if (detailMatch?.[1]?.trim()) return detailMatch[1].trim();
+
+  // "a-brand" class used on some Amazon layouts
+  const aBrandMatch = html.match(/class="a-brand"[^>]*>([^<]+)</i);
+  if (aBrandMatch?.[1]?.trim()) return aBrandMatch[1].trim();
+
+  // Try extracting from the product title – Amazon titles often start with brand name
+  // e.g. "Dove Fresh Beauty Cucumber Green Tea Scent Body Wash..."
+  const titleMatch = html.match(/id="productTitle"[^>]*>\s*([^<]+)/i);
+  if (titleMatch?.[1]) {
+    const productTitle = titleMatch[1].trim();
+    // Take the first word(s) as brand – typically the brand is the first token
+    // before a descriptive word. Use og:title or title tag as fallback.
+    const firstWord = productTitle.split(/\s+/)[0];
+    if (firstWord && firstWord.length > 1) return firstWord;
+  }
+
+  // Fallback: parse brand from the page <title> which is typically "Brand - Product ... - Amazon.com"
+  const pageTitleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+  if (pageTitleMatch?.[1]) {
+    const pageTitle = pageTitleMatch[1].trim();
+    // Amazon titles often end with " - Amazon.com" or "| Amazon.com"
+    const cleaned = pageTitle.replace(/\s*[-|]\s*Amazon\.\w+.*$/i, "").trim();
+    if (cleaned) {
+      // The title usually starts with the brand name or "Brand - Product description"
+      const dashSplit = cleaned.split(/\s+-\s+/);
+      if (dashSplit.length > 1 && dashSplit[0].split(/\s+/).length <= 3) {
+        return dashSplit[0].trim();
+      }
+      // Otherwise take the first word as brand
+      const firstWord = cleaned.split(/\s+/)[0];
+      if (firstWord && firstWord.length > 1) return firstWord;
+    }
+  }
+
   return null;
 }
 
@@ -305,7 +344,13 @@ export async function POST(request: NextRequest) {
       brand = extractAmazonBrand(html);
     }
 
-    if (!brand) brand = extractBrand(html, finalUrl);
+    if (!brand) {
+      brand = extractBrand(html, finalUrl);
+      // Don't return the marketplace name as the product brand
+      if (isAmazon && brand && /^amazon/i.test(brand)) {
+        brand = null;
+      }
+    }
 
     return NextResponse.json({ category, brand });
   } catch {
