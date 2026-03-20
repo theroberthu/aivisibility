@@ -1,14 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
   return (
     <header className="border-b border-border-subtle bg-white">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <span className="w-[7px] h-[7px] bg-accent rounded-[1px]" />
-          <span className="text-sm font-semibold text-dark tracking-tight">
-            Your GEO Report
-          </span>
+        <Link href="/" className="flex items-center gap-2 group">
+          <Image
+            src="/logo.png"
+            alt="YourGEOReport"
+            width={180}
+            height={40}
+            priority
+          />
         </Link>
         <nav className="flex items-center gap-6">
           <Link
