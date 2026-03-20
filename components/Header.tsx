@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="border-b border-border-subtle" style={{ backgroundColor: "#faf9f9" }}>
+    <header className="border-b border-border-subtle bg-white">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
           <Image
@@ -11,7 +11,7 @@ export default function Header() {
             alt="YourGEOReport"
             width={180}
             height={40}
-            className="mix-blend-multiply"
+            className="brightness-[1.03] contrast-[1.05]"
             priority
           />
         </Link>
