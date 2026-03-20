@@ -87,6 +87,20 @@ export default function VisibilityForm() {
       return;
     }
 
+    // Send report email in background (don't block redirect)
+    fetch("/api/send-report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email.trim(),
+        brandName: brand.trim(),
+        category: category.trim(),
+        reportId: data.id,
+      }),
+    }).catch(() => {
+      // Email send failure shouldn't block the user
+    });
+
     router.push(`/report/${data.id}`);
   }
 
