@@ -27,17 +27,23 @@ export default function WhyIBuiltThis() {
         </div>
 
         <div className="mt-10 flex items-center gap-4">
-          <img
-            src="/roberthu.PNG"
-            alt="Robert Hu"
-            className="w-10 h-10 rounded-full object-cover border border-border"
-          />
+          <a href="https://www.linkedin.com/in/theroberthu/" target="_blank" rel="noopener noreferrer">
+            <img
+              src="/roberthu.PNG"
+              alt="Robert Hu"
+              className="w-10 h-10 rounded-full object-cover border border-border"
+            />
+          </a>
           <div>
-            <p className="text-sm font-semibold text-dark">Robert Hu</p>
+            <a href="https://www.linkedin.com/in/theroberthu/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-dark hover:text-accent transition-colors">
+              Robert Hu
+            </a>
             <p className="text-xs text-muted">
               E-commerce operator &amp; builder
             </p>
-            <p className="text-xs font-mono text-muted">yourgeoreport.com</p>
+            <a href="https://theroberthu.com" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-muted hover:text-accent transition-colors">
+              theroberthu.com
+            </a>
           </div>
         </div>
       </div>
