@@ -6,6 +6,17 @@ export const metadata: Metadata = {
   title: "Insights | Your GEO Report",
   description:
     "Weekly AI visibility rankings, GEO analysis, and intelligence for ecommerce brands.",
+  openGraph: {
+    title: "Insights | Your GEO Report",
+    description:
+      "Weekly AI visibility rankings, GEO analysis, and intelligence for ecommerce brands.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Insights | Your GEO Report",
+    description:
+      "Weekly AI visibility rankings, GEO analysis, and intelligence for ecommerce brands.",
+  },
 };
 
 export default function InsightsPage() {

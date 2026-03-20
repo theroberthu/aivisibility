@@ -7,9 +7,9 @@ export default function EngineBreakdown({
 }) {
   return (
     <div className="px-6 py-6 border-b border-border">
-      <h4 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
+      <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
         Mentions by Engine
-      </h4>
+      </h2>
       <div className="space-y-3">
         {engines.map((m) => (
           <div key={m.engine} className="flex items-center gap-4">

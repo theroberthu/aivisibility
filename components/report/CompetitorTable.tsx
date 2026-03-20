@@ -10,9 +10,9 @@ export default function CompetitorTable({
   return (
     <div className="px-6 py-6 border-b border-border">
       <div className="flex items-center justify-between mb-4">
-        <h4 className="font-mono text-[10px] uppercase tracking-wider text-muted">
-          Category Rankings — {category}
-        </h4>
+        <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted">
+          Category Rankings - {category}
+        </h2>
         <span className="font-mono text-[10px] text-muted">vs. prior month</span>
       </div>
       <div className="space-y-0">

@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Your GEO Report",
+  title: "Privacy Policy | Your GEO Report",
   description:
     "How Your GEO Report collects, uses, and protects your information.",
+  openGraph: {
+    title: "Privacy Policy | Your GEO Report",
+    description:
+      "How Your GEO Report collects, uses, and protects your information.",
+  },
 };
 
 export default function PrivacyPage() {
@@ -33,19 +38,19 @@ export default function PrivacyPage() {
             </p>
             <ul className="mt-3 list-disc pl-5 space-y-1.5">
               <li>
-                <strong>Brand name</strong> — the name of the brand you want
+                <strong>Brand name</strong> - the name of the brand you want
                 analyzed.
               </li>
               <li>
-                <strong>Website URL</strong> — used to identify your brand and
+                <strong>Website URL</strong> - used to identify your brand and
                 product category.
               </li>
               <li>
-                <strong>Product category</strong> — the category your product
+                <strong>Product category</strong> - the category your product
                 competes in.
               </li>
               <li>
-                <strong>Email address</strong> — used to deliver your report and
+                <strong>Email address</strong> - used to deliver your report and
                 communicate with you about the service.
               </li>
             </ul>
@@ -94,13 +99,13 @@ export default function PrivacyPage() {
             <p>We use the following third-party services:</p>
             <ul className="mt-3 list-disc pl-5 space-y-1.5">
               <li>
-                <strong>Supabase</strong> — database hosting and storage.
+                <strong>Supabase</strong> - database hosting and storage.
               </li>
               <li>
-                <strong>Vercel</strong> — website hosting and deployment.
+                <strong>Vercel</strong> - website hosting and deployment.
               </li>
               <li>
-                <strong>OpenAI (ChatGPT) and Anthropic (Claude)</strong> — to
+                <strong>OpenAI (ChatGPT) and Anthropic (Claude)</strong> - to
                 generate AI product recommendation queries as part of the
                 analysis.
               </li>

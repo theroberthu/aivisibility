@@ -16,9 +16,9 @@ export default function PromptResults({
 
   return (
     <div className="px-6 py-6 border-b border-border">
-      <h4 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
+      <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
         Prompt Results Matrix
-      </h4>
+      </h2>
 
       {/* Engine column headers */}
       <div className="flex items-center gap-3 mb-2 pl-8">

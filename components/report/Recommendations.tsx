@@ -13,9 +13,9 @@ export default function Recommendations({
 }) {
   return (
     <div className="px-6 py-6 border-b border-border">
-      <h4 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
+      <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
         Recommendations
-      </h4>
+      </h2>
       <div className="space-y-3">
         {recommendations.map((rec, i) => (
           <div

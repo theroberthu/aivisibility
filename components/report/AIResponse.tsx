@@ -9,9 +9,9 @@ export default function AIResponse({
 }) {
   return (
     <div className="px-6 py-6 border-b border-border">
-      <h4 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
+      <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
         Actual AI Responses
-      </h4>
+      </h2>
       <div className="space-y-4">
         {responses.map((r, i) => (
           <div

@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Your GEO Report",
+  title: "Terms of Service | Your GEO Report",
   description: "Terms and conditions for using Your GEO Report.",
+  openGraph: {
+    title: "Terms of Service | Your GEO Report",
+    description: "Terms and conditions for using Your GEO Report.",
+  },
 };
 
 export default function TermsPage() {

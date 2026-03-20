@@ -18,6 +18,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${post.title} | Your GEO Report`,
     description: post.excerpt,
+    openGraph: {
+      title: `${post.title} | Your GEO Report`,
+      description: post.excerpt,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | Your GEO Report`,
+      description: post.excerpt,
+    },
   };
 }
 
@@ -26,8 +35,30 @@ export default async function InsightArticle({ params }: PageProps) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: "Robert Hu",
+      url: "https://theroberthu.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "YourGEOReport",
+      url: "https://yourgeoreport.com",
+    },
+  };
+
   return (
     <main className="max-w-3xl mx-auto px-6 py-16 md:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Link
         href="/insights"
         className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-dark font-mono transition-colors"
@@ -67,7 +98,7 @@ export default async function InsightArticle({ params }: PageProps) {
         </h3>
         <p className="mt-2 text-sm text-secondary">
           See how AI engines recommend your brand across real buyer prompts.
-          free, no credit card required.
+          Free, no credit card required.
         </p>
         <Link
           href="/#get-report"

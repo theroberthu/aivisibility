@@ -29,6 +29,21 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "YourGEOReport",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
+  description:
+    "AI visibility reports for ecommerce brands. See whether ChatGPT and Claude recommend your brand when shoppers ask what to buy.",
+  founder: {
+    "@type": "Person",
+    name: "Robert Hu",
+    url: "https://theroberthu.com",
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -40,6 +55,12 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,450;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;600&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
         />
       </head>
       <body className="font-sans text-dark bg-white antialiased">
