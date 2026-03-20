@@ -220,27 +220,6 @@ function extractBrand(
   return null;
 }
 
-/** Try to extract a brand name from an Amazon-style product URL path.
- *  Amazon URLs often follow /BrandName-Product-Description/dp/ASIN */
-function extractBrandFromAmazonUrl(url: string): string | null {
-  try {
-    const pathname = new URL(url).pathname;
-    // Match the slug before /dp/ — e.g. /CELSIUS-Fitness-Energy-Standard-.../dp/B0CX23V2ZK
-    const slugMatch = pathname.match(/^\/([A-Za-z][A-Za-z0-9]+-[^/]+)\/dp\//);
-    if (slugMatch?.[1]) {
-      const firstSegment = slugMatch[1].split("-")[0];
-      // Ignore generic words or very short tokens
-      if (firstSegment && firstSegment.length > 1 && !/^amazon$/i.test(firstSegment)) {
-        // Capitalize properly: "CELSIUS" → "CELSIUS", "dove" → "Dove"
-        return firstSegment;
-      }
-    }
-  } catch {
-    // ignore
-  }
-  return null;
-}
-
 /** Return true if a candidate brand string looks like the marketplace name. */
 function isMarketplaceName(brand: string): boolean {
   return /^amazon/i.test(brand.replace(/[.:]/g, ""));
@@ -274,15 +253,8 @@ function extractAmazonBrand(html: string, url: string): string | null {
   const aBrandMatch = html.match(/class="a-brand"[^>]*>([^<]+)</i);
   if (aBrandMatch?.[1]?.trim() && !isMarketplaceName(aBrandMatch[1])) return aBrandMatch[1].trim();
 
-  // Try extracting from the product title – Amazon titles often start with brand name
-  const titleMatch = html.match(/id="productTitle"[^>]*>\s*([^<]+)/i);
-  if (titleMatch?.[1]) {
-    const productTitle = titleMatch[1].trim();
-    const firstWord = productTitle.split(/\s+/)[0];
-    if (firstWord && firstWord.length > 1 && !isMarketplaceName(firstWord)) return firstWord;
-  }
-
-  // Fallback: parse brand from the page <title>
+  // Fallback: parse brand from the page <title> when it uses "Brand - Product" format
+  // Only extract when there's an explicit separator (not just the first word, which is unreliable)
   const pageTitleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
   if (pageTitleMatch?.[1]) {
     const pageTitle = pageTitleMatch[1].trim();
@@ -292,19 +264,14 @@ function extractAmazonBrand(html: string, url: string): string | null {
       .replace(/\s*[-|]\s*Amazon\.\w+.*$/i, "")
       .trim();
     if (cleaned) {
+      // Only use dash-separated format: "Brand - Product description"
       const dashSplit = cleaned.split(/\s+-\s+/);
       if (dashSplit.length > 1 && dashSplit[0].split(/\s+/).length <= 3) {
         const candidate = dashSplit[0].trim();
         if (!isMarketplaceName(candidate)) return candidate;
       }
-      const firstWord = cleaned.split(/\s+/)[0];
-      if (firstWord && firstWord.length > 1 && !isMarketplaceName(firstWord)) return firstWord;
     }
   }
-
-  // URL path fallback: extract brand from /BrandName-Product/dp/ASIN pattern
-  const urlBrand = extractBrandFromAmazonUrl(url);
-  if (urlBrand) return urlBrand;
 
   return null;
 }

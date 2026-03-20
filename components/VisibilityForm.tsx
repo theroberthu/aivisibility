@@ -127,7 +127,7 @@ export default function VisibilityForm() {
           </label>
           <input
             id="website"
-            type="url"
+            type="text"
             value={website}
             onChange={(e) => handleWebsiteChange(e.target.value)}
             placeholder="https://yourbrand.com"
