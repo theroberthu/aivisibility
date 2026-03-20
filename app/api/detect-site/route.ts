@@ -233,10 +233,29 @@ function extractBrand(
   return null;
 }
 
-/** Return true if a candidate brand string looks like the marketplace name. */
+/** Known marketplace/retailer names that shouldn't be returned as a product brand. */
+const MARKETPLACE_NAMES = [
+  /^amazon/i, /^ebay/i, /^walmart/i, /^target/i, /^etsy/i,
+  /^wayfair/i, /^alibaba/i, /^aliexpress/i, /^shopee/i, /^lazada/i,
+  /^rakuten/i, /^mercado\s*li/i, /^flipkart/i, /^temu/i, /^shein/i,
+];
+
+/** Return true if a candidate brand string looks like a marketplace/retailer name. */
 function isMarketplaceName(brand: string): boolean {
-  return /^amazon/i.test(brand.replace(/[.:]/g, ""));
+  const cleaned = brand.replace(/[.:]/g, "");
+  return MARKETPLACE_NAMES.some((re) => re.test(cleaned));
 }
+
+/** Words that should never be returned as a brand name (case-insensitive). */
+const BRAND_BLOCKLIST = new Set([
+  // CAPTCHA / bot-detection page titles
+  "robot", "sorry", "access", "denied", "error", "page", "blocked", "verify",
+  "captcha", "security", "challenge", "checking", "redirect", "loading",
+  // Generic title starters that aren't brand names
+  "the", "a", "an", "new", "set", "pack", "kit", "buy", "shop", "best",
+  "top", "premium", "professional", "original", "genuine", "official",
+  "updated", "upgraded", "improved", "latest", "custom", "generic",
+]);
 
 /** Extract brand from a clean Amazon product title string.
  *  Tries dash-separator first ("Brand - Product"), then first word. */
@@ -253,8 +272,14 @@ function brandFromProductTitle(title: string): string | null {
   // First word of product title — on Amazon, titles typically start with brand name
   // e.g. "CELSIUS Fitness Energy...", "Dove Body Wash...", "CeraVe Moisturizing..."
   const firstWord = title.split(/\s+/)[0]?.replace(/[,:]$/, "");
-  if (firstWord && firstWord.length > 1 && !isMarketplaceName(firstWord)) {
-    return firstWord;
+  if (
+    firstWord &&
+    firstWord.length > 1 &&
+    !isMarketplaceName(firstWord) &&
+    !BRAND_BLOCKLIST.has(firstWord.toLowerCase()) &&
+    !/^\d/.test(firstWord) // skip if starts with a number (e.g. "2-Pack", "100ct")
+  ) {
+    return decodeHtmlEntities(firstWord);
   }
 
   return null;
