@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const { error } = await resend.emails.send({
-      from: "Your GEO Report <report@yourgeoreport.com>",
+      from: "Robert from Your GEO Report <robert@yourgeoreport.com>",
       to: email,
       subject: `AI Visibility Report for ${brandName} — Score: ${report.overallScore}/100`,
       react: GeoReportEmail({
