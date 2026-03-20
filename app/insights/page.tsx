@@ -3,7 +3,7 @@ import Link from "next/link";
 import { insightPosts, formatDate } from "@/lib/insights";
 
 export const metadata: Metadata = {
-  title: "Insights — Your GEO Report",
+  title: "Insights | Your GEO Report",
   description:
     "Weekly AI visibility rankings, GEO analysis, and intelligence for ecommerce brands.",
 };

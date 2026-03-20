@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getPostBySlug(slug);
   if (!post) return { title: "Not Found" };
   return {
-    title: `${post.title} — Your GEO Report`,
+    title: `${post.title} | Your GEO Report`,
     description: post.excerpt,
   };
 }
@@ -66,7 +66,7 @@ export default async function InsightArticle({ params }: PageProps) {
           Get your free GEO report
         </h3>
         <p className="mt-2 text-sm text-secondary">
-          See how AI engines recommend your brand across real buyer prompts —
+          See how AI engines recommend your brand across real buyer prompts.
           free, no credit card required.
         </p>
         <Link
