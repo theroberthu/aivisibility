@@ -82,8 +82,14 @@ export default function VisibilityForm() {
       .single();
 
     if (error || !data) {
-      console.error("Supabase insert error:", error?.message, error?.code);
-      setErrorMsg("Something went wrong. Please try again.");
+      console.error("Supabase insert error:", error?.message, error?.code, error?.details);
+      setErrorMsg(
+        error?.code === "42501"
+          ? "Permission denied. Please check Supabase RLS policies."
+          : error?.code === "42P01"
+            ? "Table not found. Please check Supabase setup."
+            : `Something went wrong (${error?.code || "unknown"}). Please try again.`,
+      );
       setFormState("error");
       return;
     }
