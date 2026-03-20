@@ -11,6 +11,7 @@ export default function Header() {
             alt="YourGEOReport"
             width={180}
             height={40}
+            className="mix-blend-multiply"
             priority
           />
         </Link>
