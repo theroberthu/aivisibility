@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { supabase } from "@/lib/supabase";
+import { generateReport } from "@/lib/generate-report";
 import { generateMockReport } from "@/lib/mock-report-data";
 import GeoReportEmail from "@/emails/GeoReportEmail";
+import { ReportData } from "@/lib/types";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   let body: { email: string; brandName: string; category: string; reportId: string };
@@ -19,7 +24,37 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  const report = generateMockReport(brandName, category);
+  // Try to get or generate real report data
+  let report: ReportData;
+  const hasAiKeys = process.env.OPENAI_API_KEY && process.env.ANTHROPIC_API_KEY;
+
+  if (hasAiKeys) {
+    // Check if report was already generated
+    const { data: submission } = await supabase
+      .from("submissions")
+      .select("report_data")
+      .eq("id", reportId)
+      .single();
+
+    if (submission?.report_data) {
+      report = submission.report_data as ReportData;
+    } else {
+      try {
+        report = await generateReport(brandName, category);
+        // Cache it
+        await supabase
+          .from("submissions")
+          .update({ report_data: report })
+          .eq("id", reportId);
+      } catch (err) {
+        console.error("Real report generation failed for email, using mock:", err);
+        report = generateMockReport(brandName, category);
+      }
+    }
+  } else {
+    report = generateMockReport(brandName, category);
+  }
+
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://yourgeoreport.com";
   const reportUrl = `${baseUrl}/report/${reportId}`;
 
