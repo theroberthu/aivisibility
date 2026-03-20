@@ -21,7 +21,10 @@ export default function Hero() {
               <br />
               your brand?
             </h1>
-            <p className="mt-6 text-lg text-secondary leading-relaxed max-w-md">
+            <p className="mt-4 text-lg md:text-xl font-semibold text-dark">
+              Find out in 24 hours. Free.
+            </p>
+            <p className="mt-4 text-lg text-secondary leading-relaxed max-w-md">
               When buyers ask ChatGPT or Claude what to buy,
               does your brand appear? We test real buyer-intent prompts across
               both engines and score your visibility.
