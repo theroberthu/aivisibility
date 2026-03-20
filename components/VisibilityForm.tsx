@@ -82,6 +82,7 @@ export default function VisibilityForm() {
       .single();
 
     if (error || !data) {
+      console.error("Supabase insert error:", error?.message, error?.code);
       setErrorMsg("Something went wrong. Please try again.");
       setFormState("error");
       return;

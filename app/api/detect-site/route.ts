@@ -220,8 +220,34 @@ function extractBrand(
   return null;
 }
 
+/** Try to extract a brand name from an Amazon-style product URL path.
+ *  Amazon URLs often follow /BrandName-Product-Description/dp/ASIN */
+function extractBrandFromAmazonUrl(url: string): string | null {
+  try {
+    const pathname = new URL(url).pathname;
+    // Match the slug before /dp/ — e.g. /CELSIUS-Fitness-Energy-Standard-.../dp/B0CX23V2ZK
+    const slugMatch = pathname.match(/^\/([A-Za-z][A-Za-z0-9]+-[^/]+)\/dp\//);
+    if (slugMatch?.[1]) {
+      const firstSegment = slugMatch[1].split("-")[0];
+      // Ignore generic words or very short tokens
+      if (firstSegment && firstSegment.length > 1 && !/^amazon$/i.test(firstSegment)) {
+        // Capitalize properly: "CELSIUS" → "CELSIUS", "dove" → "Dove"
+        return firstSegment;
+      }
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+/** Return true if a candidate brand string looks like the marketplace name. */
+function isMarketplaceName(brand: string): boolean {
+  return /^amazon/i.test(brand.replace(/[.:]/g, ""));
+}
+
 /** Extract the brand/seller name from an Amazon product page. */
-function extractAmazonBrand(html: string): string | null {
+function extractAmazonBrand(html: string, url: string): string | null {
   // "by BrandName" pattern near the title
   const bylineMatch = html.match(
     /id="bylineInfo"[^>]*>[\s\S]*?(?:Visit the |Brand:\s*)?([^<]+)</i,
@@ -231,51 +257,54 @@ function extractAmazonBrand(html: string): string | null {
       .replace(/Visit the\s+/i, "")
       .replace(/\s+Store$/i, "")
       .trim();
-    if (cleaned) return cleaned;
+    if (cleaned && !isMarketplaceName(cleaned)) return cleaned;
   }
 
   // "brand":"BrandName" in JSON-LD or inline data
   const brandJsonMatch = html.match(/"brand"\s*:\s*(?:\{[^}]*"name"\s*:\s*)?["']([^"']+)["']/i);
-  if (brandJsonMatch?.[1]) return brandJsonMatch[1].trim();
+  if (brandJsonMatch?.[1] && !isMarketplaceName(brandJsonMatch[1])) return brandJsonMatch[1].trim();
 
   // Product detail table: "Brand" row
   const detailMatch = html.match(
     />\s*Brand\s*<\/t[hd]>\s*<td[^>]*>\s*(?:<[^>]+>\s*)*([^<]+)/i,
   );
-  if (detailMatch?.[1]?.trim()) return detailMatch[1].trim();
+  if (detailMatch?.[1]?.trim() && !isMarketplaceName(detailMatch[1])) return detailMatch[1].trim();
 
   // "a-brand" class used on some Amazon layouts
   const aBrandMatch = html.match(/class="a-brand"[^>]*>([^<]+)</i);
-  if (aBrandMatch?.[1]?.trim()) return aBrandMatch[1].trim();
+  if (aBrandMatch?.[1]?.trim() && !isMarketplaceName(aBrandMatch[1])) return aBrandMatch[1].trim();
 
   // Try extracting from the product title – Amazon titles often start with brand name
-  // e.g. "Dove Fresh Beauty Cucumber Green Tea Scent Body Wash..."
   const titleMatch = html.match(/id="productTitle"[^>]*>\s*([^<]+)/i);
   if (titleMatch?.[1]) {
     const productTitle = titleMatch[1].trim();
-    // Take the first word(s) as brand – typically the brand is the first token
-    // before a descriptive word. Use og:title or title tag as fallback.
     const firstWord = productTitle.split(/\s+/)[0];
-    if (firstWord && firstWord.length > 1) return firstWord;
+    if (firstWord && firstWord.length > 1 && !isMarketplaceName(firstWord)) return firstWord;
   }
 
-  // Fallback: parse brand from the page <title> which is typically "Brand - Product ... - Amazon.com"
+  // Fallback: parse brand from the page <title>
   const pageTitleMatch = html.match(/<title[^>]*>([^<]*)<\/title>/i);
   if (pageTitleMatch?.[1]) {
     const pageTitle = pageTitleMatch[1].trim();
-    // Amazon titles often end with " - Amazon.com" or "| Amazon.com"
-    const cleaned = pageTitle.replace(/\s*[-|]\s*Amazon\.\w+.*$/i, "").trim();
+    // Strip "Amazon.com: " prefix and " - Amazon.com" suffix
+    const cleaned = pageTitle
+      .replace(/^Amazon\.\w+\s*[:]\s*/i, "")
+      .replace(/\s*[-|]\s*Amazon\.\w+.*$/i, "")
+      .trim();
     if (cleaned) {
-      // The title usually starts with the brand name or "Brand - Product description"
       const dashSplit = cleaned.split(/\s+-\s+/);
       if (dashSplit.length > 1 && dashSplit[0].split(/\s+/).length <= 3) {
-        return dashSplit[0].trim();
+        const candidate = dashSplit[0].trim();
+        if (!isMarketplaceName(candidate)) return candidate;
       }
-      // Otherwise take the first word as brand
       const firstWord = cleaned.split(/\s+/)[0];
-      if (firstWord && firstWord.length > 1) return firstWord;
+      if (firstWord && firstWord.length > 1 && !isMarketplaceName(firstWord)) return firstWord;
     }
   }
+
+  // URL path fallback: extract brand from /BrandName-Product/dp/ASIN pattern
+  const urlBrand = extractBrandFromAmazonUrl(url);
+  if (urlBrand) return urlBrand;
 
   return null;
 }
@@ -341,13 +370,13 @@ export async function POST(request: NextRequest) {
 
     if (isAmazon) {
       if (!category) category = extractAmazonCategory(html);
-      brand = extractAmazonBrand(html);
+      brand = extractAmazonBrand(html, finalUrl);
     }
 
     if (!brand) {
       brand = extractBrand(html, finalUrl);
       // Don't return the marketplace name as the product brand
-      if (isAmazon && brand && /^amazon/i.test(brand)) {
+      if (isAmazon && brand && isMarketplaceName(brand)) {
         brand = null;
       }
     }
