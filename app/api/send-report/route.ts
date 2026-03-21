@@ -94,7 +94,9 @@ export async function POST(request: NextRequest) {
         })),
         recommendations: report.recommendations.map((r) => ({
           title: r.title,
+          description: r.description,
           priority: r.priority,
+          evidence: r.evidence,
         })),
       }),
     });

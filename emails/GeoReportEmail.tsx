@@ -44,7 +44,9 @@ interface GeoReportEmailProps {
   }>;
   recommendations: Array<{
     title: string;
+    description: string;
     priority: "high" | "medium" | "low";
+    evidence: string;
   }>;
 }
 
@@ -189,12 +191,16 @@ export default function GeoReportEmail({
           <Section style={section}>
             <Text style={sectionTitle}>RECOMMENDED NEXT ACTIONS</Text>
             {recommendations.map((rec, i) => (
-              <Text key={i} style={bodyText}>
-                {i + 1}. {rec.title}{" "}
-                <span style={priorityBadge(rec.priority)}>
-                  {rec.priority}
-                </span>
-              </Text>
+              <Section key={i} style={recCard}>
+                <Text style={recHeader}>
+                  <span style={recNumber}>{i + 1}</span> {rec.title}{" "}
+                  <span style={priorityBadge(rec.priority)}>
+                    {rec.priority}
+                  </span>
+                </Text>
+                <Text style={recDescription}>{rec.description}</Text>
+                <Text style={recEvidence}>{rec.evidence}</Text>
+              </Section>
             ))}
           </Section>
 
@@ -345,6 +351,50 @@ function priorityBadge(priority: string) {
     fontWeight: "600" as const,
   };
 }
+
+const recCard = {
+  backgroundColor: "#f9fafb",
+  borderRadius: "8px",
+  padding: "16px 20px",
+  marginBottom: "12px",
+};
+
+const recHeader = {
+  fontSize: "14px",
+  fontWeight: "600" as const,
+  color: "#111",
+  margin: "0 0 8px",
+  lineHeight: "1.4",
+};
+
+const recNumber = {
+  display: "inline-block" as const,
+  width: "20px",
+  height: "20px",
+  borderRadius: "50%",
+  backgroundColor: "#111",
+  color: "#fff",
+  fontSize: "11px",
+  fontWeight: "700" as const,
+  textAlign: "center" as const,
+  lineHeight: "20px",
+  marginRight: "6px",
+};
+
+const recDescription = {
+  fontSize: "13px",
+  color: "#333",
+  lineHeight: "1.6",
+  margin: "0 0 8px",
+};
+
+const recEvidence = {
+  fontSize: "12px",
+  color: "#6b7280",
+  lineHeight: "1.5",
+  margin: "0",
+  fontStyle: "italic" as const,
+};
 
 const ctaButton = {
   display: "inline-block",
