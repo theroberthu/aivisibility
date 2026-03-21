@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { insightPosts, formatDate } from "@/lib/insights";
+import { insightPosts, formatDate, getReadTime } from "@/lib/insights";
 
 export const metadata: Metadata = {
   title: "Insights | Your GEO Report",
@@ -53,9 +53,15 @@ export default function InsightsPage() {
                 {post.title}
               </Link>
             </h2>
-            <time className="block mt-1.5 font-mono text-xs text-muted">
-              {formatDate(post.date)}
-            </time>
+            <div className="flex items-center gap-2 mt-1.5">
+              <time className="font-mono text-xs text-muted">
+                {formatDate(post.date)}
+              </time>
+              <span className="w-1 h-1 rounded-full bg-border" />
+              <span className="font-mono text-xs text-muted">
+                {getReadTime(post)} min read
+              </span>
+            </div>
             <p className="mt-2 text-secondary text-[15px] leading-relaxed max-w-2xl">
               {post.excerpt}
             </p>

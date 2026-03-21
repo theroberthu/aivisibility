@@ -68,3 +68,8 @@ export function formatDate(dateString: string): string {
     day: "numeric",
   });
 }
+
+export function getReadTime(post: InsightPost): number {
+  const wordCount = post.body.join(" ").split(/\s+/).length;
+  return Math.max(1, Math.round(wordCount / 230));
+}
