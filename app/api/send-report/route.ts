@@ -78,7 +78,10 @@ export async function POST(request: NextRequest) {
           : undefined,
         promptResults: report.promptResults?.map((p) => ({
           prompt: p.prompt,
-          mentioned: p.engines.some((e) => e.mentioned),
+          engines: p.engines.map((e) => ({
+            engine: e.engine,
+            mentioned: e.mentioned,
+          })),
           topBrands: [...new Set(p.engines.flatMap((e) => e.topBrands || []))].slice(0, 3),
         })),
         engineBreakdown: report.engineBreakdown,

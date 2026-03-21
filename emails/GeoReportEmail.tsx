@@ -36,7 +36,10 @@ interface GeoReportEmailProps {
   }>;
   promptResults?: Array<{
     prompt: string;
-    mentioned: boolean;
+    engines: Array<{
+      engine: string;
+      mentioned: boolean;
+    }>;
     topBrands: string[];
   }>;
   recommendations: Array<{
@@ -119,18 +122,30 @@ export default function GeoReportEmail({
             <>
               <Section style={section}>
                 <Text style={sectionTitle}>PROMPTS TESTED</Text>
+                <Text style={promptHeader}>
+                  {"     "}
+                  {(promptResults[0]?.engines || []).map((e) => (
+                    <span key={e.engine} style={promptEngineLabel}>
+                      {e.engine === "ChatGPT" ? "GPT " : "CL  "}
+                    </span>
+                  ))}
+                </Text>
                 {promptResults.map((p, i) => (
                   <Text key={i} style={promptRow}>
-                    <span style={p.mentioned ? promptMentioned : promptNotMentioned}>
-                      {p.mentioned ? "YES" : "NO "}
-                    </span>
-                    {"  "}
+                    {p.engines.map((e) => (
+                      <span
+                        key={e.engine}
+                        style={e.mentioned ? promptMentioned : promptNotMentioned}
+                      >
+                        {e.mentioned ? "YES " : "NO  "}
+                      </span>
+                    ))}
                     &ldquo;{p.prompt}&rdquo;
                     {p.topBrands.length > 0 && (
                       <>
                         {"\n"}
                         <span style={topBrandsText}>
-                          {"     "}Top brands: {p.topBrands.join(", ")}
+                          {"          "}Top brands: {p.topBrands.join(", ")}
                         </span>
                       </>
                     )}
@@ -357,6 +372,20 @@ const footerText = {
 const footerLink = {
   color: "#666",
   textDecoration: "underline",
+};
+
+const promptHeader = {
+  fontFamily: '"SF Mono", "Fira Code", Menlo, Consolas, monospace',
+  fontSize: "10px",
+  color: "#999",
+  letterSpacing: "0.05em",
+  margin: "0 0 4px",
+};
+
+const promptEngineLabel = {
+  fontSize: "10px",
+  color: "#999",
+  fontWeight: "600" as const,
 };
 
 const promptRow = {
