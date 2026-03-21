@@ -55,17 +55,17 @@ export default function ScoreGauge({
         </div>
 
         <div className="flex justify-between mt-5">
-          <span className="font-mono text-[10px] text-muted">0 — Low</span>
+          <span className="font-mono text-[10px] text-muted">0 · Low</span>
           <span className="font-mono text-[10px] text-muted">
-            50 — Moderate
+            50 · Moderate
           </span>
-          <span className="font-mono text-[10px] text-muted">100 — High</span>
+          <span className="font-mono text-[10px] text-muted">100 · High</span>
         </div>
       </div>
 
       <p className="mt-5 text-sm text-secondary">
         Your score reflects how often AI mentions your brand when shoppers ask
-        buying questions — across both ChatGPT and Claude.
+        buying questions, across both ChatGPT and Claude.
       </p>
     </div>
   );

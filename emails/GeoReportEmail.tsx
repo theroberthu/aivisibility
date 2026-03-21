@@ -51,7 +51,7 @@ export default function GeoReportEmail({
     <Html>
       <Head />
       <Preview>
-        {`Your GEO Report for ${brandName} — AI Visibility Score: ${overallScore}/100`}
+        {`Your GEO Report for ${brandName} · AI Visibility Score: ${overallScore}/100`}
       </Preview>
       <Body style={main}>
         <Container style={container}>
@@ -110,7 +110,7 @@ export default function GeoReportEmail({
                 key={c.name}
                 style={c.isSubject ? highlightRow : bodyText}
               >
-                #{c.rank} {c.name} — {c.score}/100
+                #{c.rank} {c.name} · {c.score}/100
                 {c.isSubject ? " (your brand)" : ""}
               </Text>
             ))}

@@ -13,7 +13,7 @@ export default function ReportFooter({ data }: { data: ReportData }) {
       </div>
       <p className="text-[11px] text-muted/70 leading-relaxed">
         This report tests real buyer-style prompts across ChatGPT and Claude
-        as they respond at the time of analysis. Results are directional — a
+        as they respond at the time of analysis. Results are directional, a
         snapshot of current AI recommendations, not a guarantee of future
         visibility or sales performance. AI responses change as models and
         sources evolve.

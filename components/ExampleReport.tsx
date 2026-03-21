@@ -21,7 +21,7 @@ export default function ExampleReport() {
         <ul className="mt-5 space-y-2 text-sm text-dark max-w-xl">
           <li className="flex items-start gap-2.5">
             <span className="font-mono text-[10px] text-accent mt-1 shrink-0">&#x25CF;</span>
-            Whether AI mentions your brand — and how often
+            Whether AI mentions your brand, and how often
           </li>
           <li className="flex items-start gap-2.5">
             <span className="font-mono text-[10px] text-accent mt-1 shrink-0">&#x25CF;</span>

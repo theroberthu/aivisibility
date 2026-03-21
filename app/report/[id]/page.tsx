@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase";
 import ReportLoader from "@/components/report/ReportLoader";
 
 export const metadata = {
-  title: "Your AI Visibility Report — Your GEO Report",
+  title: "Your AI Visibility Report · Your GEO Report",
   description: "Your personalized AI visibility analysis across ChatGPT and Claude.",
 };
 

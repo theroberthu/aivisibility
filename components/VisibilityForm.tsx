@@ -174,7 +174,7 @@ export default function VisibilityForm() {
         Check If AI Recommends Your Brand
       </h3>
       <p className="text-xs text-muted mb-6">
-        See which competitors show up instead — across ChatGPT and Claude
+        See which competitors show up instead, across ChatGPT and Claude
       </p>
 
       <div className="space-y-4">
@@ -258,7 +258,7 @@ export default function VisibilityForm() {
             <option value="Electronics">Electronics</option>
             <option value="Clothing, Shoes & Jewelry">Clothing, Shoes &amp; Jewelry</option>
             {/* Separator */}
-            <option disabled>— More Categories —</option>
+            <option disabled>More Categories</option>
             {/* Remaining alphabetically */}
             <option value="Arts, Crafts & Sewing">Arts, Crafts &amp; Sewing</option>
             <option value="Automotive">Automotive</option>
@@ -342,7 +342,7 @@ export default function VisibilityForm() {
 
       <p className="text-[11px] text-muted/70 text-center mt-4 leading-relaxed">
         We test real buyer-style prompts across ChatGPT and Claude as they
-        respond today. Results are a snapshot — AI responses change over time.
+        respond today. Results are a snapshot. AI responses change over time.
       </p>
     </form>
   );

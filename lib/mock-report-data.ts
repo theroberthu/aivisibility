@@ -123,7 +123,7 @@ export function generateMockReport(
     },
   ];
 
-  const keyFinding = `${brandName} appears in 5 of ${prompts.length * ENGINES.length} sampled prompts across ChatGPT and Claude — below the category median of ${categoryMedian}%. ChatGPT mentions your brand in 3 of ${prompts.length} prompts; Claude in 2 of ${prompts.length}. Top competitor ${competitors[0]} appears in 80% of prompts.`;
+  const keyFinding = `${brandName} appears in 5 of ${prompts.length * ENGINES.length} tested prompts across ChatGPT and Claude, below the estimated category median of ${categoryMedian}%. ChatGPT mentions your brand in 3 of ${prompts.length} prompts; Claude in 2 of ${prompts.length}. Top competitor ${competitors[0]} appears in 80% of prompts.`;
 
   return {
     brandName,

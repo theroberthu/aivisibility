@@ -264,7 +264,7 @@ export async function generateReport(
       rank: i + 1,
       name: c.name,
       score: Math.round((c.mentionCount / maxMentions) * 100),
-      delta: "—",
+      delta: "-",
       isSubject: false,
     }));
 
@@ -321,7 +321,7 @@ export async function generateReport(
 
   // Key finding summary
   const topCompetitor = competitors.find((c) => !c.isSubject);
-  const keyFinding = `${brandName} appears in ${totalMentioned} of ${prompts.length * ENGINES.length} sampled prompts across ChatGPT and Claude${overallScore < categoryMedian ? ` — below the category median of ${categoryMedian}%` : ` — at or above the category average`}. ChatGPT mentions your brand in ${engineBreakdown[0]?.mentioned || 0} of ${engineBreakdown[0]?.total || 0} prompts; Claude in ${engineBreakdown[1]?.mentioned || 0} of ${engineBreakdown[1]?.total || 0}.${topCompetitor ? ` Top competitor ${topCompetitor.name} appears in ${topCompetitor.score}% of prompts.` : ""}`;
+  const keyFinding = `${brandName} appears in ${totalMentioned} of ${prompts.length * ENGINES.length} tested prompts across ChatGPT and Claude, ${overallScore < categoryMedian ? `below the estimated category median of ${categoryMedian}%` : `at or above the estimated category average`}. ChatGPT mentions your brand in ${engineBreakdown[0]?.mentioned || 0} of ${engineBreakdown[0]?.total || 0} prompts; Claude in ${engineBreakdown[1]?.mentioned || 0} of ${engineBreakdown[1]?.total || 0}.${topCompetitor ? ` Top competitor ${topCompetitor.name} appears in ${topCompetitor.score}% of prompts.` : ""}`;
 
   const now = new Date();
 

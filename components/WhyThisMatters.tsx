@@ -19,7 +19,7 @@ export default function WhyThisMatters() {
         <p className="mt-6 text-lg text-secondary leading-relaxed max-w-xl">
           Before they open Amazon or Google, a growing number of buyers ask
           ChatGPT or Claude what to buy. These are the kinds of prompts they
-          ask — and each one returns a shortlist of 3–5 brand recommendations:
+          ask, and each one returns a shortlist of 3–5 brand recommendations:
         </p>
 
         {/* Example queries — tabular research index */}
@@ -62,7 +62,7 @@ export default function WhyThisMatters() {
         <div className="mt-10 space-y-4 text-secondary leading-relaxed border-l-2 border-border pl-6">
           <p>
             When a shopper asks AI &ldquo;what should I buy,&rdquo; the response
-            names 3–5 brands — not 20 links. If your brand isn&apos;t in that
+            names 3–5 brands, not 20 links. If your brand isn&apos;t in that
             shortlist, you&apos;re invisible to a growing share of buyers who
             never make it to your Amazon listing or website.
           </p>

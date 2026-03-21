@@ -10,7 +10,7 @@ export default function CompetitorTable({
   return (
     <div className="px-6 py-6 border-b border-border">
       <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
-        Category Rankings — {category}
+        Category Rankings · {category}
       </h2>
       <div className="space-y-0">
         {competitors.map((c) => (

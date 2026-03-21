@@ -30,7 +30,7 @@ export default function Hero() {
               </p>
               <p className="mt-4 text-lg text-secondary leading-relaxed max-w-md">
                 When shoppers ask ChatGPT or Claude what to buy, AI recommends
-                3–5 brands — not a page of links. We test the prompts your buyers
+                3–5 brands, not a page of links. We test the prompts your buyers
                 actually ask and show you who AI recommends instead of you.
               </p>
               <p className="mt-3 text-[13px] font-mono text-muted tracking-wide uppercase">
@@ -67,7 +67,7 @@ export default function Hero() {
                 <ul className="space-y-2 text-sm text-secondary">
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">01</span>
-                    Whether AI mentions your brand — and how often
+                    Whether AI mentions your brand, and how often
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">02</span>
