@@ -55,7 +55,8 @@ export async function POST(request: NextRequest) {
     report = generateMockReport(brandName, category);
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://yourgeoreport.com";
+  const requestUrl = new URL(request.url);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${requestUrl.protocol}//${requestUrl.host}`;
   const reportUrl = `${baseUrl}/report/${reportId}`;
 
   try {
