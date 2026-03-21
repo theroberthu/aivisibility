@@ -1,16 +1,14 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
-type FormState = "idle" | "submitting" | "error";
+type FormState = "idle" | "submitting" | "error" | "success";
 
 const inputClass =
   "w-full rounded-lg border border-border px-4 py-2.5 text-sm text-dark placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-colors";
 
 export default function VisibilityForm() {
-  const router = useRouter();
   const [formState, setFormState] = useState<FormState>("idle");
   const [brand, setBrand] = useState("");
   const [website, setWebsite] = useState("");
@@ -18,6 +16,7 @@ export default function VisibilityForm() {
   const [email, setEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [detecting, setDetecting] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const userEditedBrand = useRef(false);
   const userEditedCategory = useRef(false);
@@ -94,7 +93,7 @@ export default function VisibilityForm() {
       return;
     }
 
-    // Send report email in background (don't block redirect)
+    // Send report email in background (don't block success state)
     fetch("/api/send-report", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -108,7 +107,62 @@ export default function VisibilityForm() {
       // Email send failure shouldn't block the user
     });
 
-    router.push(`/report/${data.id}`);
+    setFormState("success");
+  }
+
+  async function handleCopyLink() {
+    try {
+      await navigator.clipboard.writeText("https://yourgeoreport.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers
+      const input = document.createElement("input");
+      input.value = "https://yourgeoreport.com";
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }
+
+  // Success state
+  if (formState === "success") {
+    return (
+      <div className="bg-surface rounded-xl border border-border border-t-2 border-t-success p-8 text-center">
+        {/* Green checkmark */}
+        <div className="mx-auto w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mb-4">
+          <svg className="w-7 h-7 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+
+        <h3 className="text-lg font-semibold text-dark mb-2">
+          You&apos;re in!
+        </h3>
+        <p className="text-sm text-secondary mb-6">
+          Check your inbox within 24 hours.
+        </p>
+
+        <div className="border-t border-border pt-5">
+          <p className="text-xs text-muted mb-3">
+            Know another brand owner who should see this?
+          </p>
+          <button
+            type="button"
+            onClick={handleCopyLink}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-medium text-dark hover:bg-light-bg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20"
+          >
+            <svg className="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            {copied ? "Copied!" : "Copy link"}
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -192,41 +246,29 @@ export default function VisibilityForm() {
             <option value="" disabled>
               Select a category…
             </option>
-            <option value="Arts, Crafts & Sewing">
-              Arts, Crafts &amp; Sewing
-            </option>
-            <option value="Automotive">Automotive</option>
-            <option value="Baby Products">Baby Products</option>
-            <option value="Beauty & Personal Care">
-              Beauty &amp; Personal Care
-            </option>
-            <option value="Books">Books</option>
-            <option value="Cell Phones & Accessories">
-              Cell Phones &amp; Accessories
-            </option>
-            <option value="Clothing, Shoes & Jewelry">
-              Clothing, Shoes &amp; Jewelry
-            </option>
-            <option value="Electronics">Electronics</option>
-            <option value="Grocery & Gourmet Food">
-              Grocery &amp; Gourmet Food
-            </option>
+            {/* Popular categories */}
             <option value="Health & Household">Health &amp; Household</option>
+            <option value="Beauty & Personal Care">Beauty &amp; Personal Care</option>
             <option value="Home & Kitchen">Home &amp; Kitchen</option>
-            <option value="Industrial & Scientific">
-              Industrial &amp; Scientific
-            </option>
+            <option value="Sports & Outdoors">Sports &amp; Outdoors</option>
             <option value="Kitchen & Dining">Kitchen &amp; Dining</option>
+            <option value="Baby Products">Baby Products</option>
+            <option value="Pet Supplies">Pet Supplies</option>
+            <option value="Grocery & Gourmet Food">Grocery &amp; Gourmet Food</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing, Shoes & Jewelry">Clothing, Shoes &amp; Jewelry</option>
+            {/* Separator */}
+            <option disabled>— More Categories —</option>
+            {/* Remaining alphabetically */}
+            <option value="Arts, Crafts & Sewing">Arts, Crafts &amp; Sewing</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Books">Books</option>
+            <option value="Cell Phones & Accessories">Cell Phones &amp; Accessories</option>
+            <option value="Industrial & Scientific">Industrial &amp; Scientific</option>
             <option value="Musical Instruments">Musical Instruments</option>
             <option value="Office Products">Office Products</option>
-            <option value="Patio, Lawn & Garden">
-              Patio, Lawn &amp; Garden
-            </option>
-            <option value="Pet Supplies">Pet Supplies</option>
-            <option value="Sports & Outdoors">Sports &amp; Outdoors</option>
-            <option value="Tools & Home Improvement">
-              Tools &amp; Home Improvement
-            </option>
+            <option value="Patio, Lawn & Garden">Patio, Lawn &amp; Garden</option>
+            <option value="Tools & Home Improvement">Tools &amp; Home Improvement</option>
             <option value="Toys & Games">Toys &amp; Games</option>
             <option value="Video Games">Video Games</option>
             <option value="Other">Other</option>
@@ -252,10 +294,20 @@ export default function VisibilityForm() {
         </div>
       </div>
 
+      {/* Social proof */}
+      <div className="flex items-center justify-center gap-1.5 mt-5 mb-1">
+        <svg className="w-3.5 h-3.5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span className="text-xs text-muted">
+          Trusted by 50+ ecommerce brands
+        </span>
+      </div>
+
       <button
         type="submit"
         disabled={formState === "submitting"}
-        className="w-full mt-6 bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full mt-2 bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {formState === "submitting" ? (
           <span className="font-mono text-sm">Submitting…</span>
@@ -272,8 +324,31 @@ export default function VisibilityForm() {
         Free · No credit card · ChatGPT + Claude
       </p>
       <p className="text-[11px] text-muted/70 text-center mt-2">
-        We'll email your report within 24 hours. No spam, ever.
+        We&apos;ll email your report within 24 hours. No spam, ever.
       </p>
+
+      {/* Built by */}
+      <div className="flex items-center gap-3 mt-5 pt-4 border-t border-border-subtle">
+        <a href="https://www.linkedin.com/in/theroberthu/" target="_blank" rel="noopener noreferrer">
+          <img
+            src="/roberthu.PNG"
+            alt="Robert Hu"
+            className="w-8 h-8 rounded-full object-cover border border-border"
+          />
+        </a>
+        <p className="text-[11px] text-muted leading-snug">
+          Built by{" "}
+          <a
+            href="https://www.linkedin.com/in/theroberthu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-dark font-medium hover:text-accent transition-colors"
+          >
+            Robert Hu
+          </a>
+          {" "}· E-commerce operator
+        </p>
+      </div>
 
       <p className="text-[11px] text-muted/70 text-center mt-4 leading-relaxed">
         Reports are based on sampled buyer-intent prompts and current AI
