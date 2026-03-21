@@ -246,32 +246,85 @@ export default function VisibilityForm() {
             <option value="" disabled>
               Select a category…
             </option>
-            {/* Popular categories */}
-            <option value="Health & Household">Health &amp; Household</option>
-            <option value="Beauty & Personal Care">Beauty &amp; Personal Care</option>
-            <option value="Home & Kitchen">Home &amp; Kitchen</option>
-            <option value="Sports & Outdoors">Sports &amp; Outdoors</option>
-            <option value="Kitchen & Dining">Kitchen &amp; Dining</option>
-            <option value="Baby Products">Baby Products</option>
-            <option value="Pet Supplies">Pet Supplies</option>
-            <option value="Grocery & Gourmet Food">Grocery &amp; Gourmet Food</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Clothing, Shoes & Jewelry">Clothing, Shoes &amp; Jewelry</option>
-            {/* Separator */}
-            <option disabled>More Categories</option>
-            {/* Remaining alphabetically */}
-            <option value="Arts, Crafts & Sewing">Arts, Crafts &amp; Sewing</option>
-            <option value="Automotive">Automotive</option>
-            <option value="Books">Books</option>
-            <option value="Cell Phones & Accessories">Cell Phones &amp; Accessories</option>
-            <option value="Industrial & Scientific">Industrial &amp; Scientific</option>
-            <option value="Musical Instruments">Musical Instruments</option>
-            <option value="Office Products">Office Products</option>
-            <option value="Patio, Lawn & Garden">Patio, Lawn &amp; Garden</option>
-            <option value="Tools & Home Improvement">Tools &amp; Home Improvement</option>
-            <option value="Toys & Games">Toys &amp; Games</option>
-            <option value="Video Games">Video Games</option>
-            <option value="Other">Other</option>
+            <optgroup label="Beauty & Personal Care">
+              <option value="Beauty & Personal Care">Beauty &amp; Personal Care (General)</option>
+              <option value="Skincare">Skincare</option>
+              <option value="Haircare">Haircare</option>
+              <option value="Makeup & Cosmetics">Makeup &amp; Cosmetics</option>
+              <option value="Fragrances">Fragrances</option>
+              <option value="Men's Grooming">Men&apos;s Grooming</option>
+            </optgroup>
+            <optgroup label="Health & Household">
+              <option value="Health & Household">Health &amp; Household (General)</option>
+              <option value="Vitamins & Supplements">Vitamins &amp; Supplements</option>
+              <option value="Protein Powder & Sports Nutrition">Protein Powder &amp; Sports Nutrition</option>
+              <option value="Oral Care">Oral Care</option>
+              <option value="First Aid & Medical">First Aid &amp; Medical</option>
+              <option value="Cleaning Supplies">Cleaning Supplies</option>
+            </optgroup>
+            <optgroup label="Home & Kitchen">
+              <option value="Home & Kitchen">Home &amp; Kitchen (General)</option>
+              <option value="Bedding & Mattresses">Bedding &amp; Mattresses</option>
+              <option value="Kitchen Appliances">Kitchen Appliances</option>
+              <option value="Cookware">Cookware</option>
+              <option value="Home Organization">Home Organization</option>
+              <option value="Air Purifiers & Humidifiers">Air Purifiers &amp; Humidifiers</option>
+            </optgroup>
+            <optgroup label="Pet Supplies">
+              <option value="Pet Supplies">Pet Supplies (General)</option>
+              <option value="Dog Food">Dog Food</option>
+              <option value="Cat Food">Cat Food</option>
+              <option value="Cat Litter">Cat Litter</option>
+              <option value="Pet Grooming">Pet Grooming</option>
+              <option value="Pet Toys & Accessories">Pet Toys &amp; Accessories</option>
+            </optgroup>
+            <optgroup label="Sports & Outdoors">
+              <option value="Sports & Outdoors">Sports &amp; Outdoors (General)</option>
+              <option value="Running Shoes">Running Shoes</option>
+              <option value="Fitness Equipment">Fitness Equipment</option>
+              <option value="Camping & Hiking">Camping &amp; Hiking</option>
+              <option value="Yoga & Pilates">Yoga &amp; Pilates</option>
+            </optgroup>
+            <optgroup label="Electronics">
+              <option value="Electronics">Electronics (General)</option>
+              <option value="Headphones & Earbuds">Headphones &amp; Earbuds</option>
+              <option value="Smart Home Devices">Smart Home Devices</option>
+              <option value="Laptops & Computers">Laptops &amp; Computers</option>
+              <option value="Phone Accessories">Phone Accessories</option>
+            </optgroup>
+            <optgroup label="Baby Products">
+              <option value="Baby Products">Baby Products (General)</option>
+              <option value="Diapers & Wipes">Diapers &amp; Wipes</option>
+              <option value="Baby Food & Formula">Baby Food &amp; Formula</option>
+              <option value="Strollers & Car Seats">Strollers &amp; Car Seats</option>
+            </optgroup>
+            <optgroup label="Grocery & Gourmet Food">
+              <option value="Grocery & Gourmet Food">Grocery &amp; Gourmet Food (General)</option>
+              <option value="Coffee & Tea">Coffee &amp; Tea</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Organic & Natural Foods">Organic &amp; Natural Foods</option>
+            </optgroup>
+            <optgroup label="Clothing, Shoes & Jewelry">
+              <option value="Clothing, Shoes & Jewelry">Clothing, Shoes &amp; Jewelry (General)</option>
+              <option value="Athletic Wear">Athletic Wear</option>
+              <option value="Watches">Watches</option>
+              <option value="Handbags & Wallets">Handbags &amp; Wallets</option>
+            </optgroup>
+            <optgroup label="More Categories">
+              <option value="Arts, Crafts & Sewing">Arts, Crafts &amp; Sewing</option>
+              <option value="Automotive">Automotive</option>
+              <option value="Books">Books</option>
+              <option value="Cell Phones & Accessories">Cell Phones &amp; Accessories</option>
+              <option value="Industrial & Scientific">Industrial &amp; Scientific</option>
+              <option value="Kitchen & Dining">Kitchen &amp; Dining</option>
+              <option value="Musical Instruments">Musical Instruments</option>
+              <option value="Office Products">Office Products</option>
+              <option value="Patio, Lawn & Garden">Patio, Lawn &amp; Garden</option>
+              <option value="Tools & Home Improvement">Tools &amp; Home Improvement</option>
+              <option value="Toys & Games">Toys &amp; Games</option>
+              <option value="Video Games">Video Games</option>
+              <option value="Other">Other</option>
+            </optgroup>
           </select>
         </div>
 
