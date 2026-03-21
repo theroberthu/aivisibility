@@ -58,24 +58,26 @@ export default async function ReportPage({
               I help brands improve their AI visibility — from content strategy
               to technical positioning. Happy to walk through your results.
             </p>
-            <a
-              href="https://theroberthu.com/free-strategy-session?utm_source=yourgeoreport&utm_medium=report&utm_campaign=free-strategy-session"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-1.5 text-sm text-accent hover:underline"
-            >
-              Book a free strategy session
-            </a>
+            <div className="flex items-center gap-3 mt-1.5">
+              <a
+                href="https://theroberthu.com/free-strategy-session?utm_source=yourgeoreport&utm_medium=report&utm_campaign=free-strategy-session"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-accent hover:underline"
+              >
+                Book a free strategy session
+              </a>
+              <span className="text-muted">·</span>
+              <a
+                href="https://www.linkedin.com/in/theroberthu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-accent hover:underline"
+              >
+                LinkedIn
+              </a>
+            </div>
           </div>
-        </div>
-
-        <div className="mt-4 text-center">
-          <p className="text-xs text-muted">
-            Questions about your report?{" "}
-            <a href="mailto:robert@yourgeoreport.com" className="text-accent hover:underline">
-              robert@yourgeoreport.com
-            </a>
-          </p>
         </div>
       </div>
     </main>
