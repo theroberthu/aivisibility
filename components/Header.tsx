@@ -80,7 +80,7 @@ export default function Header() {
             }}
             className="block w-full bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg text-center text-sm transition-colors"
           >
-            Get My Free Report
+            Check My AI Visibility
           </a>
         </div>
       </div>

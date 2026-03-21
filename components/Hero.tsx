@@ -19,21 +19,22 @@ export default function Hero() {
                 </p>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-dark leading-[1.1] tracking-tight">
-                Is AI recommending
+                See which competitors
                 <br />
-                your brand?
+                AI recommends instead
+                <br className="hidden md:inline" />
+                {" "}of your brand
               </h1>
               <p className="mt-4 text-lg md:text-xl font-semibold text-dark">
-                Find out in 24 hours. Free.
+                Free report. Delivered in 24 hours.
               </p>
               <p className="mt-4 text-lg text-secondary leading-relaxed max-w-md">
-                When buyers ask ChatGPT or Claude what to buy,
-                does your brand appear? We test real buyer-intent prompts across
-                both engines and score your visibility.
+                When shoppers ask ChatGPT or Claude what to buy, AI recommends
+                3–5 brands — not a page of links. We test the prompts your buyers
+                actually ask and show you who AI recommends instead of you.
               </p>
-              <p className="mt-3 text-[15px] text-dark font-medium max-w-md">
-                Built for ecommerce brands that want to know when AI recommends
-                competitors instead.
+              <p className="mt-3 text-[13px] font-mono text-muted tracking-wide uppercase">
+                For Amazon and DTC product brands
               </p>
 
               <div className="w-full h-px bg-border my-8" />
@@ -46,7 +47,7 @@ export default function Hero() {
                 </div>
                 <div>
                   <p className="font-mono text-[22px] font-semibold text-dark tabular-nums leading-none">10+</p>
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-muted mt-1.5">Prompts tested</p>
+                  <p className="font-mono text-[10px] uppercase tracking-wider text-muted mt-1.5">Buyer prompts tested</p>
                 </div>
                 <div>
                   <p className="font-mono text-[22px] font-semibold text-dark tabular-nums leading-none">5+</p>
@@ -66,19 +67,19 @@ export default function Hero() {
                 <ul className="space-y-2 text-sm text-secondary">
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">01</span>
-                    Visibility score benchmarked against category competitors
+                    Whether AI mentions your brand — and how often
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">02</span>
-                    Engine-by-engine breakdown of brand mentions
+                    Which competitors AI recommends instead of you
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">03</span>
-                    Competitor ranking — who AI recommends instead of you
+                    Which buyer prompts you miss entirely
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">04</span>
-                    Actual AI responses showing how your brand is (or isn&apos;t) cited
+                    What to fix first to start showing up
                   </li>
                 </ul>
               </div>

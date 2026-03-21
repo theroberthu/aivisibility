@@ -9,12 +9,9 @@ export default function CompetitorTable({
 }) {
   return (
     <div className="px-6 py-6 border-b border-border">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted">
-          Category Rankings - {category}
-        </h2>
-        <span className="font-mono text-[10px] text-muted">vs. prior month</span>
-      </div>
+      <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
+        Category Rankings — {category}
+      </h2>
       <div className="space-y-0">
         {competitors.map((c) => (
           <div
@@ -52,17 +49,6 @@ export default function CompetitorTable({
                   style={{ width: `${c.score}%` }}
                 />
               </div>
-              <span
-                className={`font-mono text-xs tabular-nums ${
-                  c.delta.startsWith("+")
-                    ? "text-emerald-600"
-                    : c.delta.startsWith("-")
-                    ? "text-red-500"
-                    : "text-muted"
-                }`}
-              >
-                {c.delta}
-              </span>
               <span className="font-mono font-semibold text-dark tabular-nums w-16 text-right">
                 {c.score}
                 <span className="text-muted font-normal">/100</span>

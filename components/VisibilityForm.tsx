@@ -171,10 +171,10 @@ export default function VisibilityForm() {
       className="bg-surface rounded-xl border border-border border-t-2 border-t-accent p-8"
     >
       <h3 className="text-base font-semibold text-dark mb-1">
-        Get Your GEO Report
+        Check If AI Recommends Your Brand
       </h3>
       <p className="text-xs text-muted mb-6">
-        AI visibility analysis for your brand and category
+        See which competitors show up instead — across ChatGPT and Claude
       </p>
 
       <div className="space-y-4">
@@ -294,25 +294,15 @@ export default function VisibilityForm() {
         </div>
       </div>
 
-      {/* Social proof */}
-      <div className="flex items-center justify-center gap-1.5 mt-5 mb-1">
-        <svg className="w-3.5 h-3.5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-        <span className="text-xs text-muted">
-          Trusted by 50+ ecommerce brands
-        </span>
-      </div>
-
       <button
         type="submit"
         disabled={formState === "submitting"}
-        className="w-full mt-2 bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full mt-6 bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {formState === "submitting" ? (
           <span className="font-mono text-sm">Submitting…</span>
         ) : (
-          "Get My GEO Report"
+          "Get My Free Report"
         )}
       </button>
 
@@ -351,8 +341,8 @@ export default function VisibilityForm() {
       </div>
 
       <p className="text-[11px] text-muted/70 text-center mt-4 leading-relaxed">
-        Reports are based on sampled buyer-intent prompts and current AI
-        responses. Results may vary as AI systems change over time.
+        We test real buyer-style prompts across ChatGPT and Claude as they
+        respond today. Results are a snapshot — AI responses change over time.
       </p>
     </form>
   );

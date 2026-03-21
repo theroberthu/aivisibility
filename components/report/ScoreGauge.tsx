@@ -19,7 +19,7 @@ export default function ScoreGauge({
         <div>
           <span className="font-mono text-lg text-muted">/ 100</span>
           <p className="font-mono text-xs text-muted mt-0.5">
-            Category median: {median}
+            Est. category median: {median}
           </p>
         </div>
       </div>
@@ -64,8 +64,8 @@ export default function ScoreGauge({
       </div>
 
       <p className="mt-5 text-sm text-secondary">
-        Score reflects the percentage of buyer-intent prompts where your brand
-        was mentioned or recommended, weighted by engine and prompt relevance.
+        Your score reflects how often AI mentions your brand when shoppers ask
+        buying questions — across both ChatGPT and Claude.
       </p>
     </div>
   );
