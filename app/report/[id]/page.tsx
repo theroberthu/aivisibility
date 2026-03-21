@@ -34,11 +34,29 @@ export default async function ReportPage({
           cachedReport={submission.report_data}
         />
 
-        <div className="mt-8 text-center">
-          <p className="text-sm text-muted">
+        <div className="mt-12 border border-border rounded-lg px-6 py-5 bg-surface text-center">
+          <p className="text-sm text-dark font-medium">
+            Want help acting on this report?
+          </p>
+          <p className="text-xs text-secondary mt-1 leading-relaxed max-w-md mx-auto">
+            I help brands improve their AI visibility — from content strategy
+            to technical positioning. Happy to walk through your results.
+          </p>
+          <a
+            href="https://theroberthu.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-3 text-sm text-accent hover:underline"
+          >
+            theroberthu.com
+          </a>
+        </div>
+
+        <div className="mt-4 text-center">
+          <p className="text-xs text-muted">
             Questions about your report?{" "}
             <a href="mailto:robert@yourgeoreport.com" className="text-accent hover:underline">
-              Get in touch
+              robert@yourgeoreport.com
             </a>
           </p>
         </div>
