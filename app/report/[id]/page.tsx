@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { supabaseServer } from "@/lib/supabase-server";
+import { getSupabaseServer } from "@/lib/supabase-server";
 import ReportLoader from "@/components/report/ReportLoader";
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default async function ReportPage({
 }) {
   const { id } = await params;
 
-  const { data: submission, error } = await supabaseServer
+  const { data: submission, error } = await getSupabaseServer()
     .from("submissions")
     .select("brand_name, product_category, report_data")
     .eq("id", id)

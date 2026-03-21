@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { supabaseServer } from "@/lib/supabase-server";
+import { getSupabaseServer } from "@/lib/supabase-server";
 import { generateReport } from "@/lib/generate-report";
 import { generateMockReport } from "@/lib/mock-report-data";
 import GeoReportEmail from "@/emails/GeoReportEmail";
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
   if (hasAiKeys) {
     // Check if report was already generated
-    const { data: submission } = await supabaseServer
+    const { data: submission } = await getSupabaseServer()
       .from("submissions")
       .select("report_data")
       .eq("id", reportId)
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       try {
         report = await generateReport(brandName, category);
         // Cache it
-        await supabaseServer
+        await getSupabaseServer()
           .from("submissions")
           .update({ report_data: report })
           .eq("id", reportId);
