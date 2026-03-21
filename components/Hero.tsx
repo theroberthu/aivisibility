@@ -14,7 +14,7 @@ export default function Hero() {
                   Your GEO Report
                 </p>
                 <span className="w-1 h-1 rounded-full bg-border" />
-                <p className="font-mono text-[11px] text-muted tabular-nums">
+                <p className="font-mono tabular-nums text-[12px] bg-accent-subtle text-accent px-2.5 py-1 rounded-full font-medium md:text-[11px] md:bg-transparent md:text-muted md:px-0 md:py-0 md:rounded-none md:font-normal">
                   Edition 03 · March 2026
                 </p>
               </div>
