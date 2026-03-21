@@ -15,14 +15,21 @@ export default async function ReportPage({
 }) {
   const { id } = await params;
 
-  const { data: submission, error } = await getSupabaseServer()
+  const supabase = getSupabaseServer();
+  const { data: submission, error } = await supabase
     .from("submissions")
     .select("brand_name, product_category, report_data")
     .eq("id", id)
     .single();
 
   if (error || !submission) {
-    notFound();
+    return (
+      <main className="min-h-screen bg-light-bg flex items-center justify-center">
+        <pre className="bg-white p-8 rounded-lg shadow text-sm max-w-xl overflow-auto">
+          {JSON.stringify({ id, error: error?.message, code: error?.code, details: error?.details, hint: error?.hint, hasSubmission: !!submission }, null, 2)}
+        </pre>
+      </main>
+    );
   }
 
   return (
