@@ -34,6 +34,11 @@ interface GeoReportEmailProps {
     score: number;
     isSubject: boolean;
   }>;
+  promptResults?: Array<{
+    prompt: string;
+    mentioned: boolean;
+    topBrands: string[];
+  }>;
   recommendations: Array<{
     title: string;
     priority: "high" | "medium" | "low";
@@ -48,6 +53,7 @@ export default function GeoReportEmail({
   reportUrl,
   keyFinding,
   executiveSummary,
+  promptResults,
   engineBreakdown,
   competitors,
   recommendations,
@@ -107,6 +113,33 @@ export default function GeoReportEmail({
           </Section>
 
           <Hr style={divider} />
+
+          {/* Prompts Tested */}
+          {promptResults && promptResults.length > 0 && (
+            <>
+              <Section style={section}>
+                <Text style={sectionTitle}>PROMPTS TESTED</Text>
+                {promptResults.map((p, i) => (
+                  <Text key={i} style={promptRow}>
+                    <span style={p.mentioned ? promptMentioned : promptNotMentioned}>
+                      {p.mentioned ? "YES" : "NO "}
+                    </span>
+                    {"  "}
+                    &ldquo;{p.prompt}&rdquo;
+                    {p.topBrands.length > 0 && (
+                      <>
+                        {"\n"}
+                        <span style={topBrandsText}>
+                          {"     "}Top brands: {p.topBrands.join(", ")}
+                        </span>
+                      </>
+                    )}
+                  </Text>
+                ))}
+              </Section>
+              <Hr style={divider} />
+            </>
+          )}
 
           {/* Engine Breakdown */}
           <Section style={section}>
@@ -324,4 +357,30 @@ const footerText = {
 const footerLink = {
   color: "#666",
   textDecoration: "underline",
+};
+
+const promptRow = {
+  fontFamily: '"SF Mono", "Fira Code", Menlo, Consolas, monospace',
+  fontSize: "12px",
+  color: "#333",
+  lineHeight: "1.6",
+  margin: "0 0 6px",
+  whiteSpace: "pre-wrap" as const,
+};
+
+const promptMentioned = {
+  color: "#059669",
+  fontWeight: "700" as const,
+  fontSize: "10px",
+};
+
+const promptNotMentioned = {
+  color: "#999",
+  fontWeight: "600" as const,
+  fontSize: "10px",
+};
+
+const topBrandsText = {
+  fontSize: "11px",
+  color: "#999",
 };
