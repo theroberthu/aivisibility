@@ -11,7 +11,7 @@ export default function Header() {
             alt="YourGEOReport"
             width={180}
             height={40}
-            className="brightness-[1.03] contrast-[1.05]"
+            className="brightness-[1.03] contrast-[1.05] mix-blend-multiply"
             priority
           />
         </Link>
