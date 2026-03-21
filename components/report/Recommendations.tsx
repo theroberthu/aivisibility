@@ -8,14 +8,18 @@ const PRIORITY_STYLES = {
 
 export default function Recommendations({
   recommendations,
+  hideTitle,
 }: {
   recommendations: Recommendation[];
+  hideTitle?: boolean;
 }) {
   return (
-    <div className="px-6 py-6 border-b border-border">
-      <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
-        Recommendations
-      </h2>
+    <div className={hideTitle ? "px-6 py-6" : "px-6 py-6 border-b border-border"}>
+      {!hideTitle && (
+        <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
+          Recommendations
+        </h2>
+      )}
       <div className="space-y-3">
         {recommendations.map((rec, i) => (
           <div

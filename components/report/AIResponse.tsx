@@ -3,15 +3,19 @@ import { AIResponseData } from "@/lib/types";
 export default function AIResponse({
   responses,
   brandName,
+  hideTitle,
 }: {
   responses: AIResponseData[];
   brandName: string;
+  hideTitle?: boolean;
 }) {
   return (
-    <div className="px-6 py-6 border-b border-border">
-      <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
-        Actual AI Responses
-      </h2>
+    <div className={hideTitle ? "px-6 py-6" : "px-6 py-6 border-b border-border"}>
+      {!hideTitle && (
+        <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
+          Actual AI Responses
+        </h2>
+      )}
       <div className="space-y-4">
         {responses.map((r, i) => (
           <div
