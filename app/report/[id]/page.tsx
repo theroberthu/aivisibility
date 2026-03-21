@@ -52,7 +52,7 @@ export default async function ReportPage({
               to technical positioning. Happy to walk through your results.
             </p>
             <a
-              href="https://theroberthu.com/free-strategy-session"
+              href="https://theroberthu.com/free-strategy-session?utm_source=yourgeoreport&utm_medium=report&utm_campaign=free-strategy-session"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-1.5 text-sm text-accent hover:underline"
