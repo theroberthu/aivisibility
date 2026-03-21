@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseServer } from "@/lib/supabase-server";
 import { generateReport } from "@/lib/generate-report";
 
 export const maxDuration = 60; // Allow up to 60s for AI API calls
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Read submission
-  const { data: submission, error: readError } = await supabase
+  const { data: submission, error: readError } = await supabaseServer
     .from("submissions")
     .select("brand_name, product_category, report_data")
     .eq("id", submissionId)
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     );
 
     // Cache in Supabase
-    await supabase
+    await supabaseServer
       .from("submissions")
       .update({ report_data: report })
       .eq("id", submissionId);
