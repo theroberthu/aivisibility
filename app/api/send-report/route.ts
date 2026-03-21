@@ -70,6 +70,12 @@ export async function POST(request: NextRequest) {
         categoryMedian: report.categoryMedian,
         reportUrl,
         keyFinding: report.keyFinding,
+        executiveSummary: report.executiveSummary
+          ? {
+              overview: report.executiveSummary.overview,
+              bestOpportunity: report.executiveSummary.bestOpportunity,
+            }
+          : undefined,
         engineBreakdown: report.engineBreakdown,
         competitors: report.competitors.map((c) => ({
           rank: c.rank,

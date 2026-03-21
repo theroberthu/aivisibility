@@ -18,6 +18,10 @@ interface GeoReportEmailProps {
   categoryMedian: number;
   reportUrl: string;
   keyFinding: string;
+  executiveSummary?: {
+    overview: string;
+    bestOpportunity: string;
+  };
   engineBreakdown: Array<{
     engine: string;
     mentioned: number;
@@ -43,6 +47,7 @@ export default function GeoReportEmail({
   categoryMedian,
   reportUrl,
   keyFinding,
+  executiveSummary,
   engineBreakdown,
   competitors,
   recommendations,
@@ -69,6 +74,20 @@ export default function GeoReportEmail({
           </Section>
 
           <Hr style={divider} />
+
+          {/* Executive Summary */}
+          {executiveSummary && (
+            <>
+              <Section style={section}>
+                <Text style={sectionTitle}>WHAT WE FOUND</Text>
+                <Text style={bodyText}>{executiveSummary.overview}</Text>
+                <Text style={{ ...bodyText, fontWeight: "600", color: "#059669" }}>
+                  Best opportunity: {executiveSummary.bestOpportunity}
+                </Text>
+              </Section>
+              <Hr style={divider} />
+            </>
+          )}
 
           {/* Score */}
           <Section style={scoreSection}>
@@ -104,7 +123,7 @@ export default function GeoReportEmail({
 
           {/* Competitor Ranking */}
           <Section style={section}>
-            <Text style={sectionTitle}>COMPETITOR RANKING</Text>
+            <Text style={sectionTitle}>BRANDS AI RECOMMENDS MOST</Text>
             {competitors.map((c) => (
               <Text
                 key={c.name}
@@ -120,7 +139,7 @@ export default function GeoReportEmail({
 
           {/* Recommendations */}
           <Section style={section}>
-            <Text style={sectionTitle}>TOP RECOMMENDATIONS</Text>
+            <Text style={sectionTitle}>RECOMMENDED NEXT ACTIONS</Text>
             {recommendations.map((rec, i) => (
               <Text key={i} style={bodyText}>
                 {i + 1}. {rec.title}{" "}
@@ -136,8 +155,8 @@ export default function GeoReportEmail({
           {/* CTA */}
           <Section style={{ ...section, textAlign: "center" as const }}>
             <Text style={bodyText}>
-              View your full report with AI responses, prompt-level results, and
-              detailed recommendations:
+              View the full report with prompt-level results, competitor
+              analysis, opportunity map, and evidence-based recommendations:
             </Text>
             <Link href={reportUrl} style={ctaButton}>
               View Full Report
@@ -153,7 +172,7 @@ export default function GeoReportEmail({
             </Text>
             <Text style={footerText}>
               This report is based on sampled buyer-intent prompts and current AI
-              responses. Results may vary as AI systems change over time.
+              responses. Results are directional and may vary as AI systems update.
             </Text>
             <Text style={footerText}>
               Questions?{" "}

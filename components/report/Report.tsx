@@ -1,12 +1,15 @@
 import { ReportData } from "@/lib/types";
 import ReportHeader from "./ReportHeader";
-import ScoreGauge from "./ScoreGauge";
+import ExecutiveSummary from "./ExecutiveSummary";
+import ScoringDimensions from "./ScoringDimensions";
 import EngineBreakdown from "./EngineBreakdown";
-import CompetitorTable from "./CompetitorTable";
 import PromptResults from "./PromptResults";
+import CompetitorTable from "./CompetitorTable";
+import CompetitorInsights from "./CompetitorInsights";
+import OpportunityMap from "./OpportunityMap";
 import AIResponse from "./AIResponse";
 import Recommendations from "./Recommendations";
-import ReportFooter from "./ReportFooter";
+import MethodologyNote from "./MethodologyNote";
 import CollapsibleSection from "./CollapsibleSection";
 
 export default function Report({ data }: { data: ReportData }) {
@@ -14,34 +17,45 @@ export default function Report({ data }: { data: ReportData }) {
     <div className="bg-surface rounded-none sm:rounded-lg border border-border overflow-hidden shadow-sm">
       <ReportHeader data={data} />
 
-      {/* Key finding callout */}
-      <div className="px-6 py-5 border-b border-border bg-accent/5">
-        <p className="font-mono text-[10px] uppercase tracking-wider text-accent mb-2 font-medium">
-          Key Finding
-        </p>
-        <p className="text-sm text-dark leading-relaxed">{data.keyFinding}</p>
-      </div>
+      {/* A. Executive Summary */}
+      <ExecutiveSummary summary={data.executiveSummary} />
 
-      <ScoreGauge score={data.overallScore} median={data.categoryMedian} />
-      <EngineBreakdown engines={data.engineBreakdown} />
-      <CompetitorTable
-        competitors={data.competitors}
-        category={data.category}
+      {/* B. Visibility Score Summary */}
+      <ScoringDimensions
+        overall={data.overallScore}
+        median={data.categoryMedian}
+        dimensions={data.scoreDimensions}
       />
+      <EngineBreakdown engines={data.engineBreakdown} />
+
+      {/* C. Prompt-Level Results Table */}
       <PromptResults
         results={data.promptResults}
         totalPrompts={data.methodology.prompts}
       />
 
+      {/* D. Competitors AI Recommended Most Often */}
+      <CompetitorTable
+        competitors={data.competitors}
+        category={data.category}
+      />
+
+      {/* E. Why Competitors Are Winning */}
+      <CompetitorInsights insights={data.competitorInsights} />
+
+      {/* F. Opportunity Map */}
+      <OpportunityMap buckets={data.opportunityMap} />
+
+      {/* G. Recommended Next Actions */}
+      <Recommendations recommendations={data.recommendations} />
+
+      {/* Sample AI Responses (collapsible) */}
       <CollapsibleSection title="Actual AI Responses">
         <AIResponse responses={data.aiResponses} brandName={data.brandName} hideTitle />
       </CollapsibleSection>
 
-      <CollapsibleSection title="Recommendations">
-        <Recommendations recommendations={data.recommendations} hideTitle />
-      </CollapsibleSection>
-
-      <ReportFooter data={data} />
+      {/* H. Methodology / Disclaimer */}
+      <MethodologyNote data={data} />
     </div>
   );
 }

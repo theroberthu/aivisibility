@@ -15,7 +15,12 @@ export interface Competitor {
 
 export interface PromptResult {
   prompt: string;
-  engines: Array<{ engine: string; mentioned: boolean }>;
+  engines: Array<{
+    engine: string;
+    mentioned: boolean;
+    topBrands: string[];
+  }>;
+  note: string;
 }
 
 export interface AIResponseData {
@@ -30,6 +35,24 @@ export interface Recommendation {
   title: string;
   description: string;
   priority: "high" | "medium" | "low";
+  evidence: string;
+}
+
+export interface ScoreDimension {
+  label: string;
+  score: number;
+  description: string;
+}
+
+export interface OpportunityBucket {
+  label: string;
+  description: string;
+  prompts: string[];
+}
+
+export interface CompetitorInsight {
+  pattern: string;
+  detail: string;
 }
 
 export interface ReportData {
@@ -37,12 +60,26 @@ export interface ReportData {
   category: string;
   reportDate: string;
   reportId: string;
-  methodology: { engines: number; prompts: number };
+  methodology: {
+    engines: number;
+    prompts: number;
+    enginesUsed: string[];
+    dateGenerated: string;
+  };
   overallScore: number;
   categoryMedian: number;
   keyFinding: string;
+  executiveSummary: {
+    overview: string;
+    losingPromptTypes: string;
+    winningCompetitorTypes: string;
+    bestOpportunity: string;
+  };
+  scoreDimensions: ScoreDimension[];
   engineBreakdown: EngineResult[];
   competitors: Competitor[];
+  competitorInsights: CompetitorInsight[];
+  opportunityMap: OpportunityBucket[];
   promptResults: PromptResult[];
   aiResponses: AIResponseData[];
   recommendations: Recommendation[];

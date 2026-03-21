@@ -17,7 +17,7 @@ export default function Recommendations({
     <div className={hideTitle ? "px-6 py-6" : "px-6 py-6 border-b border-border"}>
       {!hideTitle && (
         <h2 className="font-mono text-[10px] uppercase tracking-wider text-muted mb-4">
-          Recommendations
+          Recommended Next Actions
         </h2>
       )}
       <div className="space-y-3">
@@ -36,14 +36,24 @@ export default function Recommendations({
                     {rec.title}
                   </span>
                   <span
-                    className={`font-mono text-[9px] uppercase px-1.5 py-0.5 rounded border ${PRIORITY_STYLES[rec.priority]}`}
+                    className={`font-mono text-[9px] uppercase px-1.5 py-0.5 rounded border shrink-0 ${PRIORITY_STYLES[rec.priority]}`}
                   >
                     {rec.priority}
                   </span>
                 </div>
-                <p className="text-sm text-secondary leading-relaxed">
+                <p className="text-sm text-secondary leading-relaxed mb-2">
                   {rec.description}
                 </p>
+                {rec.evidence && (
+                  <div className="bg-light-bg rounded px-3 py-2">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-muted mb-0.5">
+                      Evidence
+                    </p>
+                    <p className="text-xs text-muted leading-relaxed">
+                      {rec.evidence}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
