@@ -15,6 +15,17 @@ export default function Footer() {
           <p className="mt-4 font-mono text-xs text-muted">
             &copy; {new Date().getFullYear()} Your GEO Report
           </p>
+          <p className="mt-2 font-mono text-xs text-muted">
+            Powered by{" "}
+            <a
+              href="https://getrecoscope.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-dark transition-colors"
+            >
+              RecoScope
+            </a>
+          </p>
         </div>
         <nav className="flex flex-col gap-4 md:pt-0.5">
           <div className="flex gap-6">
@@ -25,10 +36,16 @@ export default function Footer() {
               Insights
             </Link>
             <a
-              href="/#get-report"
+              href="/#get-scorecard"
               className="text-sm text-secondary hover:text-dark transition-colors"
             >
-              Get Report
+              Get Scorecard
+            </a>
+            <a
+              href="/#pricing"
+              className="text-sm text-secondary hover:text-dark transition-colors"
+            >
+              Pricing
             </a>
           </div>
           <div className="flex gap-6">

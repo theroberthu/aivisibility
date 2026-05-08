@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getSupabaseServer } from "@/lib/supabase-server";
-import ReportLoader from "@/components/report/ReportLoader";
+import Scorecard from "@/components/Scorecard";
 
 export const metadata = {
-  title: "Your AI Visibility Report · Your GEO Report",
-  description: "Your personalized AI visibility analysis across ChatGPT and Claude.",
+  title: "Your AI Visibility Scorecard · Your GEO Report",
+  description: "Your personalized AI visibility scorecard across ChatGPT and Claude.",
 };
 
 export default async function ReportPage({
@@ -32,17 +32,58 @@ export default async function ReportPage({
     );
   }
 
+  const reportData = submission.report_data;
+
   return (
     <main className="min-h-screen bg-light-bg">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 md:py-20">
-        <ReportLoader
-          submissionId={id}
-          brandName={submission.brand_name}
-          category={submission.product_category}
-          cachedReport={submission.report_data}
-        />
+        {reportData ? (
+          <>
+            <div className="mb-8">
+              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-muted mb-2">
+                AI Visibility Scorecard
+              </p>
+              <h1 className="text-2xl md:text-3xl font-bold text-dark tracking-tight">
+                Scorecard for {submission.brand_name}
+              </h1>
+              <p className="mt-2 text-sm text-secondary">
+                {submission.product_category} · Generated from {reportData.methodology.engines} AI engines ×{" "}
+                {reportData.methodology.prompts} buyer-intent prompts
+              </p>
+            </div>
 
-        <div className="mt-12 border border-border rounded-lg px-6 py-5 bg-surface flex items-center gap-4">
+            <Scorecard data={reportData} />
+          </>
+        ) : (
+          <div className="text-center py-20">
+            <p className="text-sm text-secondary font-medium">
+              Your scorecard is being prepared. Check back soon.
+            </p>
+          </div>
+        )}
+
+        {/* Audit upsell */}
+        <div className="mt-10 border-2 border-accent rounded-lg p-6 bg-surface text-center">
+          <p className="text-lg font-semibold text-dark mb-2">
+            Want the complete analysis?
+          </p>
+          <p className="text-sm text-secondary mb-1 max-w-md mx-auto">
+            The Brand AI Visibility Audit ($500) includes prompt-level results,
+            competitor insights, opportunity map, 4–6 prioritized recommendations,
+            and a 30-minute review call with Robert.
+          </p>
+          <a
+            href="https://theroberthu.com/free-strategy-session?utm_source=yourgeoreport&utm_medium=scorecard&utm_campaign=paid-audit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 bg-dark hover:bg-primary text-white font-medium py-3 px-8 rounded-lg text-sm transition-colors"
+          >
+            Get the Full Audit · $500
+          </a>
+        </div>
+
+        {/* Help box */}
+        <div className="mt-6 border border-border rounded-lg px-6 py-5 bg-surface flex items-center gap-4">
           <Image
             src="/roberthu.PNG"
             alt="Robert Hu"
@@ -52,7 +93,7 @@ export default async function ReportPage({
           />
           <div>
             <p className="text-sm text-dark font-medium">
-              Want help acting on this report?
+              Want help acting on these results?
             </p>
             <p className="text-xs text-secondary mt-0.5 leading-relaxed">
               I help brands improve their AI visibility — from content strategy

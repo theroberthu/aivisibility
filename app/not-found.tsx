@@ -8,7 +8,7 @@ export default function NotFound() {
           404
         </p>
         <h1 className="text-2xl font-bold text-dark mb-3">
-          Report not found
+          Page not found
         </h1>
         <p className="text-secondary text-sm leading-relaxed mb-8">
           This report may have expired or the link may be incorrect. If you
@@ -16,10 +16,10 @@ export default function NotFound() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
-            href="/#get-report"
+            href="/#get-scorecard"
             className="bg-dark hover:bg-primary text-white font-medium py-2.5 px-6 rounded-lg text-sm transition-colors"
           >
-            Get a New Report
+            Get a Free Scorecard
           </Link>
           <Link
             href="/"

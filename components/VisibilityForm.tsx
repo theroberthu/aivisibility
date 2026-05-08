@@ -355,7 +355,7 @@ export default function VisibilityForm() {
         {formState === "submitting" ? (
           <span className="font-mono text-sm">Submitting…</span>
         ) : (
-          "Get My Free Report"
+          "Get My Free Scorecard"
         )}
       </button>
 
@@ -367,7 +367,7 @@ export default function VisibilityForm() {
         Free · No credit card · ChatGPT + Claude
       </p>
       <p className="text-[11px] text-muted/70 text-center mt-2">
-        We&apos;ll email your report within 24 hours. No spam, ever.
+        We&apos;ll email your scorecard within 24 hours. No spam, ever.
       </p>
 
       {/* Built by */}

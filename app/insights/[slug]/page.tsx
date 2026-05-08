@@ -94,17 +94,17 @@ export default async function InsightArticle({ params }: PageProps) {
       {/* CTA */}
       <div className="mt-16 border-t-2 border-accent bg-light-bg rounded-lg p-8">
         <h3 className="text-lg font-semibold text-dark">
-          Get your free GEO report
+          Get your free AI Visibility Scorecard
         </h3>
         <p className="mt-2 text-sm text-secondary">
-          See how AI engines recommend your brand across real buyer prompts.
+          See your AI visibility score, top competitors, and one next action.
           Free, no credit card required.
         </p>
         <Link
-          href="/#get-report"
+          href="/#get-scorecard"
           className="inline-block mt-4 bg-dark hover:bg-primary text-white font-medium py-2.5 px-6 rounded-lg text-sm transition-colors"
         >
-          Get My GEO Report
+          Get My Free Scorecard
         </Link>
       </div>
     </main>

@@ -34,7 +34,7 @@ export function ogImageElement(): ReactElement {
             color: "#9494a8",
           }}
         >
-          AI Visibility Report
+          AI Visibility Scorecard
         </div>
         <div
           style={{
@@ -78,7 +78,7 @@ export function ogImageElement(): ReactElement {
           maxWidth: "700px",
         }}
       >
-        AI Visibility Reports for Ecommerce Brands
+        AI Visibility Scorecards & Audits for Ecommerce Brands
       </div>
 
       {/* Divider */}

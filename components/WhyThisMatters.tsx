@@ -68,7 +68,7 @@ export default function WhyThisMatters() {
           </p>
           <p className="font-medium text-dark">
             Most ecommerce brands have no way to see whether AI recommends them
-            or their competitors. That&apos;s what this report shows you.
+            or their competitors. That&apos;s what this scorecard shows you.
           </p>
         </div>
       </div>

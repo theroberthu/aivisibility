@@ -2,7 +2,7 @@ import VisibilityForm from "./VisibilityForm";
 
 export default function Hero() {
   return (
-    <section id="get-report" className="border-b border-border-subtle">
+    <section id="get-scorecard" className="border-b border-border-subtle">
       <div className="max-w-6xl mx-auto px-6 py-20 md:py-32">
         <div className="grid md:grid-cols-2 gap-16 md:gap-20 items-start">
           {/* Left column — copy */}
@@ -26,7 +26,7 @@ export default function Hero() {
                 {" "}of your brand
               </h1>
               <p className="mt-4 text-lg md:text-xl font-semibold text-dark">
-                Free report. Delivered in 24 hours.
+                Free AI Visibility Scorecard. Delivered in 24 hours.
               </p>
               <p className="mt-4 text-lg text-secondary leading-relaxed max-w-md">
                 When shoppers ask ChatGPT or Claude what to buy, AI recommends
@@ -67,19 +67,19 @@ export default function Hero() {
                 <ul className="space-y-2 text-sm text-secondary">
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">01</span>
-                    Whether AI mentions your brand, and how often
+                    Your brand&apos;s AI visibility score (0–100)
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">02</span>
-                    Which competitors AI recommends instead of you
+                    Top 3 competitors AI recommends in your category
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">03</span>
-                    Which buyer prompts you miss entirely
+                    One sentence on where you&apos;re losing visibility
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-mono text-[10px] text-muted mt-1 shrink-0">04</span>
-                    What to fix first to start showing up
+                    One recommended next action
                   </li>
                 </ul>
               </div>

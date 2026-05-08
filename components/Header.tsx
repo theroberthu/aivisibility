@@ -8,7 +8,7 @@ export default function Header() {
   const [formOutOfView, setFormOutOfView] = useState(false);
 
   useEffect(() => {
-    const formEl = document.getElementById("get-report");
+    const formEl = document.getElementById("get-scorecard");
     if (!formEl) return;
 
     const observer = new IntersectionObserver(
@@ -45,7 +45,7 @@ export default function Header() {
             </Link>
             {/* Desktop: always show. Mobile: only show when form is out of view */}
             <a
-              href="/#get-report"
+              href="/#get-scorecard"
               className={`text-sm font-medium text-dark hover:text-accent transition-all duration-300 ${
                 formOutOfView
                   ? "opacity-100 translate-y-0"
@@ -53,7 +53,7 @@ export default function Header() {
               }`}
               aria-hidden={!formOutOfView ? "true" : undefined}
             >
-              Get Report
+              Get Scorecard
             </a>
           </nav>
         </div>
@@ -67,15 +67,15 @@ export default function Header() {
             : "translate-y-full opacity-0 pointer-events-none"
         }`}
         role="complementary"
-        aria-label="Get your free report"
+        aria-label="Get your free scorecard"
       >
         <div className="shadow-[0_-2px_8px_rgba(0,0,0,0.08)] bg-white px-4 py-3">
           <a
-            href="/#get-report"
+            href="/#get-scorecard"
             onClick={(e) => {
               e.preventDefault();
               document
-                .getElementById("get-report")
+                .getElementById("get-scorecard")
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
             className="block w-full bg-dark hover:bg-primary text-white font-medium py-3 px-6 rounded-lg text-center text-sm transition-colors"

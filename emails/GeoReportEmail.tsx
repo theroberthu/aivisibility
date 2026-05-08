@@ -58,16 +58,17 @@ export default function GeoReportEmail({
   reportUrl,
   keyFinding,
   executiveSummary,
-  promptResults,
-  engineBreakdown,
   competitors,
   recommendations,
 }: GeoReportEmailProps) {
+  const top3 = competitors.filter((c) => !c.isSubject).slice(0, 3);
+  const topRec = recommendations[0];
+
   return (
     <Html>
       <Head />
       <Preview>
-        {`Your GEO Report for ${brandName} · AI Visibility Score: ${overallScore}/100`}
+        {`Your AI Visibility Scorecard for ${brandName} · Score: ${overallScore}/100`}
       </Preview>
       <Body style={main}>
         <Container style={container}>
@@ -78,7 +79,7 @@ export default function GeoReportEmail({
 
           {/* Title */}
           <Section style={section}>
-            <Text style={heading}>AI Visibility Report</Text>
+            <Text style={heading}>AI Visibility Scorecard</Text>
             <Text style={subheading}>
               {brandName} · {category}
             </Text>
@@ -119,102 +120,65 @@ export default function GeoReportEmail({
 
           <Hr style={divider} />
 
-          {/* Prompts Tested */}
-          {promptResults && promptResults.length > 0 && (
+          {/* Top 3 Competitors */}
+          <Section style={section}>
+            <Text style={sectionTitle}>TOP 3 COMPETITORS</Text>
+            {top3.map((c, i) => (
+              <Text key={c.name} style={bodyText}>
+                #{i + 1} {c.name} · {c.score}/100
+              </Text>
+            ))}
+          </Section>
+
+          <Hr style={divider} />
+
+          {/* Top Recommendation */}
+          {topRec && (
             <>
               <Section style={section}>
-                <Text style={sectionTitle}>PROMPTS TESTED</Text>
-                <Text style={promptHeader}>
-                  {"     "}
-                  {(promptResults[0]?.engines || []).map((e) => (
-                    <span key={e.engine} style={promptEngineLabel}>
-                      {e.engine === "ChatGPT" ? "GPT " : "CL  "}
-                    </span>
-                  ))}
-                </Text>
-                {promptResults.map((p, i) => (
-                  <Text key={i} style={promptRow}>
-                    {p.engines.map((e) => (
-                      <span
-                        key={e.engine}
-                        style={e.mentioned ? promptMentioned : promptNotMentioned}
-                      >
-                        {e.mentioned ? "YES " : "NO  "}
-                      </span>
-                    ))}
-                    &ldquo;{p.prompt}&rdquo;
-                    {p.topBrands.length > 0 && (
-                      <>
-                        {"\n"}
-                        <span style={topBrandsText}>
-                          {"          "}Top brands: {p.topBrands.join(", ")}
-                        </span>
-                      </>
-                    )}
-                  </Text>
-                ))}
+                <Text style={sectionTitle}>RECOMMENDED NEXT ACTION</Text>
+                <Section style={recCard}>
+                  <Text style={recHeader}>{topRec.title}</Text>
+                  <Text style={recDescription}>{topRec.description}</Text>
+                </Section>
               </Section>
               <Hr style={divider} />
             </>
           )}
 
-          {/* Engine Breakdown */}
-          <Section style={section}>
-            <Text style={sectionTitle}>ENGINE BREAKDOWN</Text>
-            {engineBreakdown.map((engine) => (
-              <Text key={engine.engine} style={bodyText}>
-                <strong>{engine.engine}:</strong> mentioned in {engine.mentioned} of{" "}
-                {engine.total} prompts ({engine.percentage}%)
-              </Text>
-            ))}
-          </Section>
-
-          <Hr style={divider} />
-
-          {/* Competitor Ranking */}
-          <Section style={section}>
-            <Text style={sectionTitle}>BRANDS AI RECOMMENDS MOST</Text>
-            {competitors.map((c) => (
-              <Text
-                key={c.name}
-                style={c.isSubject ? highlightRow : bodyText}
-              >
-                #{c.rank} {c.name} · {c.score}/100
-                {c.isSubject ? " (your brand)" : ""}
-              </Text>
-            ))}
-          </Section>
-
-          <Hr style={divider} />
-
-          {/* Recommendations */}
-          <Section style={section}>
-            <Text style={sectionTitle}>RECOMMENDED NEXT ACTIONS</Text>
-            {recommendations.map((rec, i) => (
-              <Section key={i} style={recCard}>
-                <Text style={recHeader}>
-                  <span style={recNumber}>{i + 1}</span> {rec.title}{" "}
-                  <span style={priorityBadge(rec.priority)}>
-                    {rec.priority}
-                  </span>
-                </Text>
-                <Text style={recDescription}>{rec.description}</Text>
-                <Text style={recEvidence}>{rec.evidence}</Text>
-              </Section>
-            ))}
-          </Section>
-
-          <Hr style={divider} />
-
-          {/* CTA */}
+          {/* View Scorecard CTA */}
           <Section style={{ ...section, textAlign: "center" as const }}>
-            <Text style={bodyText}>
-              View the full report with prompt-level results, competitor
-              analysis, opportunity map, and evidence-based recommendations:
-            </Text>
-            <Link href={reportUrl} style={ctaButton}>
-              View Full Report
+            <Link href={reportUrl} style={ctaButtonSecondary}>
+              View Your Scorecard Online
             </Link>
+          </Section>
+
+          <Hr style={divider} />
+
+          {/* Audit Upsell */}
+          <Section style={upsellSection}>
+            <Text style={upsellHeading}>Want the full picture?</Text>
+            <Text style={bodyText}>
+              The Brand AI Visibility Audit ($500) includes everything in your
+              scorecard, plus:
+            </Text>
+            <Text style={upsellList}>
+              • 10+ prompts tested per engine with results{"\n"}
+              • Engine-by-engine breakdown (ChatGPT vs Claude){"\n"}
+              • Competitor insights &amp; analysis{"\n"}
+              • Opportunity map showing where to win{"\n"}
+              • 4–6 prioritized recommendations with evidence{"\n"}
+              • Actual AI response transcripts{"\n"}
+              • 30-minute review call with Robert
+            </Text>
+            <Text style={{ textAlign: "center" as const, margin: "16px 0 0" }}>
+              <Link
+                href="https://theroberthu.com/free-strategy-session?utm_source=yourgeoreport&utm_medium=email&utm_campaign=paid-audit"
+                style={ctaButton}
+              >
+                Get Your Full Audit · $500
+              </Link>
+            </Text>
           </Section>
 
           <Hr style={divider} />
@@ -222,10 +186,10 @@ export default function GeoReportEmail({
           {/* Footer */}
           <Section style={footer}>
             <Text style={footerText}>
-              Your GEO Report · AI Visibility Analysis
+              Your GEO Report · AI Visibility Scorecard
             </Text>
             <Text style={footerText}>
-              This report is based on sampled buyer-intent prompts and current AI
+              This scorecard is based on sampled buyer-intent prompts and current AI
               responses. Results are directional and may vary as AI systems update.
             </Text>
             <Text style={footerText}>
@@ -330,28 +294,6 @@ const bodyText = {
   margin: "0 0 8px",
 };
 
-const highlightRow = {
-  fontSize: "14px",
-  color: "#111",
-  lineHeight: "1.6",
-  margin: "0 0 8px",
-  fontWeight: "600" as const,
-};
-
-function priorityBadge(priority: string) {
-  const colors: Record<string, string> = {
-    high: "#dc2626",
-    medium: "#d97706",
-    low: "#059669",
-  };
-  return {
-    fontSize: "10px",
-    color: colors[priority] || "#999",
-    textTransform: "uppercase" as const,
-    fontWeight: "600" as const,
-  };
-}
-
 const recCard = {
   backgroundColor: "#f9fafb",
   borderRadius: "8px",
@@ -367,33 +309,11 @@ const recHeader = {
   lineHeight: "1.4",
 };
 
-const recNumber = {
-  display: "inline-block" as const,
-  width: "20px",
-  height: "20px",
-  borderRadius: "50%",
-  backgroundColor: "#111",
-  color: "#fff",
-  fontSize: "11px",
-  fontWeight: "700" as const,
-  textAlign: "center" as const,
-  lineHeight: "20px",
-  marginRight: "6px",
-};
-
 const recDescription = {
   fontSize: "13px",
   color: "#333",
   lineHeight: "1.6",
-  margin: "0 0 8px",
-};
-
-const recEvidence = {
-  fontSize: "12px",
-  color: "#6b7280",
-  lineHeight: "1.5",
   margin: "0",
-  fontStyle: "italic" as const,
 };
 
 const ctaButton = {
@@ -405,7 +325,42 @@ const ctaButton = {
   fontSize: "14px",
   fontWeight: "600" as const,
   textDecoration: "none",
-  marginTop: "12px",
+};
+
+const ctaButtonSecondary = {
+  display: "inline-block",
+  backgroundColor: "#fff",
+  color: "#111",
+  padding: "10px 28px",
+  borderRadius: "8px",
+  fontSize: "13px",
+  fontWeight: "500" as const,
+  textDecoration: "none",
+  border: "1px solid #ddd",
+};
+
+const upsellSection = {
+  padding: "0 40px",
+  backgroundColor: "#f0f4ff",
+  margin: "0 0",
+  borderRadius: "0",
+  paddingTop: "24px",
+  paddingBottom: "24px",
+};
+
+const upsellHeading = {
+  fontSize: "18px",
+  fontWeight: "700" as const,
+  color: "#111",
+  margin: "0 0 8px",
+};
+
+const upsellList = {
+  fontSize: "13px",
+  color: "#333",
+  lineHeight: "1.8",
+  margin: "8px 0 0",
+  whiteSpace: "pre-line" as const,
 };
 
 const footer = {
@@ -422,44 +377,4 @@ const footerText = {
 const footerLink = {
   color: "#666",
   textDecoration: "underline",
-};
-
-const promptHeader = {
-  fontFamily: '"SF Mono", "Fira Code", Menlo, Consolas, monospace',
-  fontSize: "10px",
-  color: "#999",
-  letterSpacing: "0.05em",
-  margin: "0 0 4px",
-};
-
-const promptEngineLabel = {
-  fontSize: "10px",
-  color: "#999",
-  fontWeight: "600" as const,
-};
-
-const promptRow = {
-  fontFamily: '"SF Mono", "Fira Code", Menlo, Consolas, monospace',
-  fontSize: "12px",
-  color: "#333",
-  lineHeight: "1.6",
-  margin: "0 0 6px",
-  whiteSpace: "pre-wrap" as const,
-};
-
-const promptMentioned = {
-  color: "#059669",
-  fontWeight: "700" as const,
-  fontSize: "10px",
-};
-
-const promptNotMentioned = {
-  color: "#999",
-  fontWeight: "600" as const,
-  fontSize: "10px",
-};
-
-const topBrandsText = {
-  fontSize: "11px",
-  color: "#999",
 };
